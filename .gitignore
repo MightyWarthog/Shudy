@@ -1,0 +1,7 @@
+# .gitignore for Shudy
+
+## directories
+bin/
+
+## files
+settings.ini
