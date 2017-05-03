@@ -10,7 +10,7 @@ import org.newdawn.slick.SlickException;
 public class Utils
 {
 	public static boolean isPlaying;
-	
+
 	public static Image getScaledImage(String img, int width, int height) throws SlickException
 	{ return new Image(img).getScaledCopy(width, height); }
 	

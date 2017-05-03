@@ -16,12 +16,12 @@ public class Level1 extends ShudyWorld
 		// scale Level1.png to display width/height
 		if ( WIDESCREEN )
 			try
-			{ setBackground( Utils.getScaledImage("assets/img/worlds/Level1_169.png", getWidth(), getHeight()) ); }
+			{ setBackground( Utils.getScaledImage("assets/img/worlds/starfield_169.png", getWidth(), getHeight()) ); }
 			catch(SlickException e)
 			{ e.printStackTrace(); }
 		else
 			try
-			{ setBackground( Utils.getScaledImage("assets/img/worlds/Level1_43.png", getWidth(), getHeight()) ); }
+			{ setBackground( Utils.getScaledImage("assets/img/worlds/starfield_43.png", getWidth(), getHeight()) ); }
 			catch(SlickException e)
 			{ e.printStackTrace(); }
 		
