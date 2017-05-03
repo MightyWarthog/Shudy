@@ -1,5 +1,11 @@
 # Shudy
 
+# Big Fat Warning
+
+    Shudy is a work in progress, and as such may not function correctly, or at all.
+
+# End Big Fat Warning
+
 Shudy is a top-down rotational shoot 'em up, much like Dead Ops Arcade in *Call of Duty: Black Ops*. It is built using the Mayflower library, which is built on top of [Slick2D](http://slick.ninjacave.com/).
 
 [Mayflower by Justin May](http://mrmaycs.com/)
