@@ -5,3 +5,16 @@ bin/
 
 ## files
 settings.ini
+
+## not sure if I'm allowed to redistribute these...
+assets/img/actors/player.gif
+assets/img/bg_space.png
+assets/img/cookie.png
+assets/img/loser.png
+assets/img/monster.png
+assets/img/playagain.png
+assets/img/robot.png
+assets/img/start.png
+assets/img/title.png
+assets/img/winner.png
+lib/mayflower2.2.jar
