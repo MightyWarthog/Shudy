@@ -18,5 +18,7 @@ public class Label extends Actor
 	{	
 		if ( ShudyWorld.SOUND && Mayflower.mouseClicked(this) )
 			Mayflower.playSound("assets/snd/beep.wav");
+		
+		getWorld().removeObjects( getIntersectingObjects( Star.class ) );
 	}
 }
