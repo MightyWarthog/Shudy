@@ -1,7 +1,7 @@
 package actors;
 
 import mayflower.Mayflower;
-import mayflower.World;
+import worlds.ShudyWorld;
 
 public class WorldChangeButton<T> extends Label
 {
@@ -21,7 +21,7 @@ public class WorldChangeButton<T> extends Label
 		
 		if ( Mayflower.mouseClicked(this) )
 			try
-			{ Mayflower.setWorld( (World) world.newInstance()  ); }
+			{ Mayflower.setWorld( (ShudyWorld) world.newInstance()  ); }
 			catch(InstantiationException | IllegalAccessException e)
 			{ e.printStackTrace(); }
 	}
