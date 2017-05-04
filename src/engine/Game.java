@@ -9,7 +9,6 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
 import mayflower.Mayflower;
-import mayflower.World;
 
 import worlds.MainMenu;
 import worlds.OptionsWorld;
@@ -69,8 +68,7 @@ public class Game extends Mayflower
 		Mayflower.showFPS(fps);
 		
 		//Load this into RAM so it's ready when the user presses options
-		@SuppressWarnings("unused")
-		World preload = new OptionsWorld();
+		new OptionsWorld();
 		
 		setWorld(new MainMenu());
 	}
