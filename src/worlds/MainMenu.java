@@ -2,7 +2,6 @@ package worlds;
 
 import actors.QuitButton;
 import actors.WorldChangeButton;
-import engine.Utils;
 
 public class MainMenu extends ShudyWorld
 {
@@ -16,16 +15,5 @@ public class MainMenu extends ShudyWorld
 		
 		WorldChangeButton<OptionsWorld> options = new WorldChangeButton<OptionsWorld>( "assets/img/buttons/options.gif", OptionsWorld.class );
 		addObject( options, getWidth()/2-100, getHeight()-200 );
-	}
-	
-	@Override
-	public void act()
-	{
-		super.act();
-		
-		if ( SOUND && !Utils.MENU_MUSIC.isPlaying() )
-			Utils.MENU_MUSIC.playLoop();
-		if ( !SOUND && Utils.MENU_MUSIC.isPlaying() )
-			Utils.MENU_MUSIC.stop();
 	}
 }

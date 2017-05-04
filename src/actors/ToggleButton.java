@@ -3,7 +3,7 @@ package actors;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.ini4j.Wini;
+import worlds.ShudyWorld;
 
 import engine.Utils;
 import mayflower.Mayflower;
@@ -19,8 +19,6 @@ public class ToggleButton extends Label
 	
 	private Class<?> c;
 	
-	protected Wini ini;
-	
 	public ToggleButton(String img, String section, String setting)
 	{
 		super("assets/img/buttons/empty.gif");
@@ -29,9 +27,7 @@ public class ToggleButton extends Label
 		this.setting = setting;
 		this.img = img;
 		
-		ini = Utils.getConfig("settings.ini");
-		
-		b = Boolean.parseBoolean( ini.get(section, setting) );
+		b = Boolean.parseBoolean( ShudyWorld.INI.get(section, setting) );
 		
 		if ( b )
 			setImage(img+"_on.gif");
@@ -55,8 +51,11 @@ public class ToggleButton extends Label
 		{
 			b = !b;
 			
-			ini.put( section, setting, b );
-			Utils.saveConfig(ini);
+			ShudyWorld.INI.put( section, setting, b );
+			
+			Utils.saveConfig(ShudyWorld.INI);
+			
+			ShudyWorld.updateFields();
 			
 			if ( b )
 				setImage(img+"_on.gif");

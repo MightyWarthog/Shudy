@@ -8,6 +8,7 @@ import actors.ProjLaser;
 import actors.ShudyActor;
 import actors.Star;
 import engine.Utils;
+
 import mayflower.Keyboard;
 import mayflower.Mayflower;
 import mayflower.World;
@@ -16,17 +17,17 @@ import org.ini4j.Wini;
 
 public abstract class ShudyWorld extends World
 {
-	private static final Wini ini = Utils.getConfig("settings.ini");
+	public static Wini INI = Utils.getConfig("settings.ini");
 
-	public static final int WIDTH = Integer.parseInt( ini.get("Display", "width") );
-	public static final int HEIGHT = Integer.parseInt( ini.get("Display", "height") );
-	public static final int RATE = Integer.parseInt( ini.get("Display", "rate") );
+	public static final int WIDTH = Integer.parseInt( INI.get("Display", "width") );
+	public static final int HEIGHT = Integer.parseInt( INI.get("Display", "height") );
+	public static final int RATE = Integer.parseInt( INI.get("Display", "rate") );
 
-	public static final boolean VSYNC = Boolean.parseBoolean( ini.get("Display", "vsync") );
-	public static final boolean FULLSCREEN = Boolean.parseBoolean( ini.get("Display", "fullscreen") );
-	public static final boolean FPS = Boolean.parseBoolean( ini.get("Display", "showFPS") );
-	public static final boolean WIDESCREEN = Boolean.parseBoolean( ini.get("Display", "widescreen") );
-	public static final boolean SOUND = Boolean.parseBoolean( ini.get("Sound", "enabled") );
+	public static boolean VSYNC = Boolean.parseBoolean( INI.get("Display", "vsync") );
+	public static boolean FULLSCREEN = Boolean.parseBoolean( INI.get("Display", "fullscreen") );
+	public static boolean SHOWFPS = Boolean.parseBoolean( INI.get("Display", "showFPS") );
+	public static final boolean WIDESCREEN = Boolean.parseBoolean( INI.get("Display", "widescreen") );
+	public static boolean SOUND = Boolean.parseBoolean( INI.get("Sound", "enabled") );
 	
 	public static final Image BACKGROUND = (WIDESCREEN)?
 			Utils.getScaledImage("assets/img/worlds/starfield_169.png", WIDTH, HEIGHT) :
@@ -60,6 +61,11 @@ public abstract class ShudyWorld extends World
 		{
 			Mayflower.setWorld(new MainMenu());
 		}
+		
+		if ( SOUND && !Utils.MENU_MUSIC.isPlaying() )
+			Utils.MENU_MUSIC.playLoop();
+		if ( !SOUND && Utils.MENU_MUSIC.isPlaying() )
+			Utils.MENU_MUSIC.stop();
 	}
 
 	private void generateStars()
@@ -70,5 +76,14 @@ public abstract class ShudyWorld extends World
 				Star s = new Star(w + (int) ( Math.random() * 32 ) - 16, h + (int) ( Math.random() * 32 ) - 16);
 				addObject( s, s.getX(), s.getY() );
 			}
+	}
+
+	public static void updateFields()
+	{
+		INI = Utils.getConfig("settings.ini");
+		VSYNC = Boolean.parseBoolean( INI.get("Display", "vsync") );
+		FULLSCREEN = Boolean.parseBoolean( INI.get("Display", "fullscreen") );
+		SHOWFPS = Boolean.parseBoolean( INI.get("Display", "showFPS") );
+		SOUND = Boolean.parseBoolean( INI.get("Sound", "enabled") );
 	}
 }

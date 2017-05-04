@@ -2,13 +2,10 @@ package worlds;
 
 import org.lwjgl.opengl.Display;
 
-import actors.Label;
 import actors.ToggleButton;
 import actors.WorldChangeButton;
 
-import mayflower.Color;
 import mayflower.Mayflower;
-import mayflower.MayflowerImage;
 
 public class OptionsWorld extends ShudyWorld
 {
@@ -28,10 +25,6 @@ public class OptionsWorld extends ShudyWorld
 		
 		ToggleButton sound = new ToggleButton( "assets/img/buttons/sound", "Sound", "enabled" );
 		addObject( sound, getWidth()/2-100, 500);
-		
-		MayflowerImage soundNote = new MayflowerImage( "Restart to toggle music.", 24, new Color(0, 136, 0) );
-		Label soundLabel = new Label(soundNote);
-		addObject( soundLabel, getWidth()/2-soundNote.getWidth()/2, 575 );
 		
 		WorldChangeButton<MainMenu> back = new WorldChangeButton<MainMenu>( "assets/img/buttons/back.gif", MainMenu.class );
 		addObject( back, getWidth()/2-100, getHeight()-100 );
