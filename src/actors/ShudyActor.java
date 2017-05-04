@@ -15,17 +15,17 @@ public abstract class ShudyActor extends Actor
 		if ( health <= 0)
 			die();
 		
-		speed();
-		rotate();
-		move();
+		//speed();
+		//rotate();
+		//move();
 	}
 	
 	private void die()
 	{ getWorld().removeObject(this); }
 	
-	protected abstract void move();
-	protected abstract void rotate();
-	protected abstract void speed();
+	//protected abstract void move();
+	//protected abstract void rotate();
+	//protected abstract void speed();
 	
 	protected void damage()
 	{
