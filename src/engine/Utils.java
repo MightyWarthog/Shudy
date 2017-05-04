@@ -9,12 +9,12 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import actors.Star;
+import mayflower.MayflowerSound;
 
 public class Utils
 {
-	public static boolean isPlaying;
-	
 	public static List<Star> starActors;
+	public static final MayflowerSound MENU_MUSIC = new MayflowerSound("assets/snd/menu_1.wav");
 
 	public static Image getScaledImage(String img, int width, int height)
 	{
