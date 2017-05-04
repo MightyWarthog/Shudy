@@ -7,6 +7,10 @@
 			<attribute name="javadoc_location" value="http://ini4j.sourceforge.net/apidocs/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/mayflower2.3.jar"/>
+	<classpathentry kind="lib" path="lib/mayflower2.3.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Shudy/lib/lwjgl/natives/linux"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
