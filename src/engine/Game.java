@@ -9,8 +9,10 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
 import mayflower.Mayflower;
+import mayflower.World;
 
 import worlds.MainMenu;
+import worlds.OptionsWorld;
 
 public class Game extends Mayflower
 {
@@ -66,17 +68,11 @@ public class Game extends Mayflower
 		Mayflower.setFullScreen(fullscreen);
 		Mayflower.showFPS(fps);
 		
+		//Load this into RAM so it's ready when the user presses options
+		@SuppressWarnings("unused")
+		World preload = new OptionsWorld();
+		
 		setWorld(new MainMenu());
-	}
-	
-	public static void reInit()
-	{
-		System.setProperty("org.lwjgl.opengl.Window.undecorated", "true");
-		
-		Display.setVSyncEnabled(vsync);
-		
-		Mayflower.setFullScreen(fullscreen);
-		Mayflower.showFPS(fps);
 	}
 	
 	private static void writeConfig() throws IOException
