@@ -8,13 +8,12 @@ import org.ini4j.Wini;
 import engine.Utils;
 import mayflower.Mayflower;
 
-import worlds.OptionsWorld;
-
 public class ToggleButton extends Label
 {
 	private String section;
 	private String setting;
 	private String extra;
+	private String img;
 	
 	private boolean b;
 	
@@ -28,6 +27,7 @@ public class ToggleButton extends Label
 		
 		this.section = section;
 		this.setting = setting;
+		this.img = img;
 		
 		ini = Utils.getConfig("settings.ini");
 		
@@ -58,13 +58,10 @@ public class ToggleButton extends Label
 			ini.put( section, setting, b );
 			Utils.saveConfig(ini);
 			
-			// act() instantiates a new world which reconstructs the buttons
-			/*
 			if ( b )
 				setImage(img+"_on.gif");
 			else
 				setImage(img+"_off.gif");
-			*/
 			
 			if ( extra != null )
 			{
@@ -82,8 +79,6 @@ public class ToggleButton extends Label
 				catch(InvocationTargetException | IllegalAccessException | IllegalArgumentException e)
 				{ e.printStackTrace(); }
 			}
-			
-			Mayflower.setWorld( new OptionsWorld() );
 		}
 	}
 }
