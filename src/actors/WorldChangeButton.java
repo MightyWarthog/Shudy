@@ -20,12 +20,9 @@ public class WorldChangeButton<T> extends Label
 		super.act();
 		
 		if ( Mayflower.mouseClicked(this) )
-		{
 			try
 			{ Mayflower.setWorld( (World) world.newInstance()  ); }
 			catch(InstantiationException | IllegalAccessException e)
 			{ e.printStackTrace(); }
-		}
 	}
-
 }

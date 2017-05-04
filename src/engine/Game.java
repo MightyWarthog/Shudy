@@ -9,13 +9,13 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
 import mayflower.Mayflower;
+
 import worlds.MainMenu;
 
 public class Game extends Mayflower
 {
 	private static int width;
 	private static int height;
-	//private static int refresh;
 	
 	private static boolean vsync;
 	private static boolean fullscreen;
