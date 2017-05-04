@@ -28,7 +28,7 @@ public class Player extends ShudyActor
 		
 		if ( Mayflower.mousePressed( null ) )
 		{
-			ProjLaser laser = new ProjLaser(5);
+			ProjLaser laser = new ProjLaser(25);
 			//laser.setRotation( (int)Math.toDegrees( Math.atan2(
 			//		Mayflower.getMouseInfo().getY() - getCenterY(),
 			//		Mayflower.getMouseInfo().getX() - getCenterX() ) ) );
