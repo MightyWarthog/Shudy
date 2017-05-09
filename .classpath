@@ -9,6 +9,7 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/mayflower2.3.jar">
 		<attributes>
+			<attribute name="javadoc_location" value="http://mrmaycs.com/mayflower/"/>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Shudy/lib/lwjgl/natives/linux"/>
 		</attributes>
 	</classpathentry>
