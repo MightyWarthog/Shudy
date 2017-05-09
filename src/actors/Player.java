@@ -5,10 +5,12 @@ import mayflower.Mayflower;
 
 public class Player extends ShudyActor
 {
+	static final String LASER_SOUNDS[] = {"assets/snd/laser1.wav", "assets/snd/laser2.wav"};
+	
 	public Player()
 	{
 		setImage("assets/img/actors/player.gif");
-		speed = 5;
+		speed = 10;
 		health = 100;
 	}
 	
@@ -29,16 +31,13 @@ public class Player extends ShudyActor
 		if ( Mayflower.mousePressed( null ) )
 		{
 			ProjLaser laser = new ProjLaser(25);
-			//laser.setRotation( (int)Math.toDegrees( Math.atan2(
-			//		Mayflower.getMouseInfo().getY() - getCenterY(),
-			//		Mayflower.getMouseInfo().getX() - getCenterX() ) ) );
-			laser.setRotation(getRotation()+270);
+			laser.setRotation(getRotation());
 			
 			getWorld().addObject(laser, getCenterX()-getImage().getWidth()/2, getCenterY());
+			Mayflower.playSound( LASER_SOUNDS[(int) (Math.random() * 2)] );
 		}
 	}
 	
-	@Override
 	protected void move()
 	{
 		if ( Mayflower.isKeyDown(Keyboard.KEY_W) )
@@ -52,42 +51,22 @@ public class Player extends ShudyActor
 		
 		if ( Mayflower.isKeyDown(Keyboard.KEY_D) )
 			setLocation(getX() + speed, getY());
-		
-		/*
-		switch( Mayflower.getKey() )
-		{
-			case Keyboard.KEY_W:
-				setLocation(getX(), getY() - speed);
-				break;
-			case Keyboard.KEY_A:
-				setLocation(getX() - speed, getY());
-				break;
-			case Keyboard.KEY_S:
-				setLocation(getX(), getY() + speed);
-				break;
-			case Keyboard.KEY_D:
-				setLocation(getX() + speed, getY());
-				break;
-		}
-		*/
 	}
 	
-	@Override
 	protected void rotate()
 	{
 		// thanks to Vishnu for helping me figure this out!
-		setRotation( (int)Math.toDegrees( Math.atan2(
+		setRotation( (int) ( Math.toDegrees( Math.atan2(
 				Mayflower.getMouseInfo().getY() - getCenterY(),
-				Mayflower.getMouseInfo().getX() - getCenterX() ) )+90 );
+				Mayflower.getMouseInfo().getX() - getCenterX() ) ) ) );
 	}
 	
-	@Override
 	protected void speed()
 	{
 		if ( Mayflower.isKeyPressed(Keyboard.KEY_UP) && speed < 20 )
 			speed++;
 		
 		if ( Mayflower.isKeyPressed(Keyboard.KEY_DOWN) && speed > 0)
-				speed--;
+			speed--;
 	}
 }
