@@ -69,4 +69,7 @@ public class Player extends ShudyActor
 		if ( Mayflower.isKeyPressed(Keyboard.KEY_DOWN) && speed > 0)
 			speed--;
 	}
+
+	public int getHealth()
+	{ return health; }
 }
