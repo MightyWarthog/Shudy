@@ -3,6 +3,7 @@ package actors;
 import java.util.List;
 
 import mayflower.Actor;
+import mayflower.World;
 
 public class ProjLaser extends Actor
 {
@@ -20,28 +21,25 @@ public class ProjLaser extends Actor
 		
 		List<Grunt> enemies = getWorld().getObjects(Grunt.class);
 		
-		//EnemyActor last;
 		for ( Grunt e : enemies )
-		{
-			//last = e;
-			if ( intersects(e) /*&& !e.equals(last)*/ )
+			if ( intersects(e) )
 			{
-				e.damage();
+				e.damage(5);
 				die();
-				//getWorld().removeObject(this);
 			}
-		}
 	}
 	
 	private void die()
 	{
-		final Actor[] particles = new Actor[32];
+		int x = getX();
+		int y = getY();
+		World w = getWorld();
 		
-		for ( Actor a : particles )
+		if( w != null )
 		{
-			a = new LaserParticle();
-			getWorld().addObject(a, getX()-2, getY());
+			for ( int i = 0; i < 32; i++ )			
+				w.addObject( new LaserParticle(), x-2, y );
+			getWorld().removeObject(this);
 		}
-		getWorld().removeObject(this);
 	}
 }
