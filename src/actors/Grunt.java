@@ -2,6 +2,8 @@ package actors;
 
 import java.util.List;
 
+import worlds.Level1;
+
 public class Grunt extends ShudyActor
 {
 	public Grunt(int h, int s, String img)
@@ -27,5 +29,12 @@ public class Grunt extends ShudyActor
 			else
 				p.damage(1);
 		}
+	}
+	
+	@Override
+	protected void die()
+	{
+		((Level1) getWorld()).addPoints(100);
+		super.die();
 	}
 }

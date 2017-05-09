@@ -14,7 +14,7 @@ public abstract class ShudyActor extends Actor
 			die();
 	}
 	
-	private void die()
+	protected void die()
 	{ getWorld().removeObject(this); }
 	
 	protected void damage(int d)
