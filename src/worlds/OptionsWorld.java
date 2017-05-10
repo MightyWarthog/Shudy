@@ -11,19 +11,19 @@ public class OptionsWorld extends ShudyWorld
 {
 	public OptionsWorld()
 	{		
-		ToggleButton vsync = new ToggleButton( "assets/img/buttons/vsync", "Display", "vsync", Display.class, "setVSyncEnabled" );
+		ToggleButton vsync = new ToggleButton( "assets/img/buttons/vsync", "vsync", Display.class, "setVSyncEnabled" );
 		addObject( vsync, getWidth()/2-100, 100);
 		
-		ToggleButton fullscreen = new ToggleButton( "assets/img/buttons/fullscreen", "Display", "fullscreen", Mayflower.class, "setFullScreen" );
+		ToggleButton fullscreen = new ToggleButton( "assets/img/buttons/fullscreen", "fullscreen", Mayflower.class, "setFullScreen" );
 		addObject( fullscreen, getWidth()/2-100, 200);
 		
-		ToggleButton fps = new ToggleButton( "assets/img/buttons/fps", "Display", "showFPS", Mayflower.class, "showFPS" );
+		ToggleButton fps = new ToggleButton( "assets/img/buttons/fps", "showFPS", Mayflower.class, "showFPS" );
 		addObject( fps, getWidth()/2-100, 300);
 		
-		ToggleButton widescreen = new ToggleButton( "assets/img/buttons/widescreen", "Display", "widescreen" );
+		ToggleButton widescreen = new ToggleButton( "assets/img/buttons/widescreen", "widescreen" );
 		addObject( widescreen, getWidth()/2-100, 400);
 		
-		ToggleButton sound = new ToggleButton( "assets/img/buttons/sound", "Sound", "enabled" );
+		ToggleButton sound = new ToggleButton( "assets/img/buttons/sound", "sound" );
 		addObject( sound, getWidth()/2-100, 500);
 		
 		WorldChangeButton<MainMenu> back = new WorldChangeButton<MainMenu>( "assets/img/buttons/back.gif", MainMenu.class );

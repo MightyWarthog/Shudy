@@ -1,62 +1,57 @@
 package engine;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-
-import org.ini4j.Wini;
+import java.util.Properties;
 
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
 import mayflower.Mayflower;
 
+import worlds.Level1;
 import worlds.MainMenu;
 import worlds.OptionsWorld;
 
 public class Game extends Mayflower
 {
-	private static int width;
-	private static int height;
+	private static final DisplayMode DISPLAY = Display.getDisplayMode();
 	
-	private static boolean vsync;
-	private static boolean fullscreen;
-	private static boolean fps;
+	private static int width = DISPLAY.getWidth();
+	private static int height = DISPLAY.getHeight();
 	
-	private static Wini ini;
-	
-	private static DisplayMode dm;
+	private static boolean vsync = true;
+	private static boolean fullscreen = true;
+	private static boolean fps = false;
 
 	public Game()
 	{ super("Shudy", width, height); }
 	
 	public static void main(String[] args)
 	{
-		dm = Display.getDisplayMode(); 
-		
-		File config = new File("settings.ini");
-		
+		File config = new File("shudy.properties");
 		if ( !config.exists() )
 			try
 			{ config.createNewFile(); }
 			catch(IOException e)
 			{ e.printStackTrace(); }
 		
+		Properties settings = new Properties();
 		try
-		{ ini = new Wini(config); }
+		{ settings.load(new FileInputStream("shudy.properties")); }
 		catch(IOException e)
 		{ e.printStackTrace(); }
 		
-		if ( ini.isEmpty() )
-			try
-			{ writeConfig(); }
-			catch(IOException e)
-			{ e.printStackTrace(); }
-		
-		readConfig();
+		if ( settings.isEmpty() )
+			writeConfig(settings);
+		else
+			readConfig(settings);
 		
 		new Game();
 	}
-
+	
 	@Override
 	public void init()
 	{
@@ -67,38 +62,43 @@ public class Game extends Mayflower
 		Mayflower.setFullScreen(fullscreen);
 		Mayflower.showFPS(fps);
 		
-		//Load this into RAM so it's ready when the user presses options
+		//Load these into RAM so it's ready when the user presses options
 		new OptionsWorld();
+		new Level1();
 		
-		setWorld(new MainMenu());
+		setWorld( new MainMenu() );
 	}
-	
-	private static void writeConfig() throws IOException
+
+	private static void readConfig(Properties p)
 	{
-		ini.put( "Display", "width", dm.getWidth() );
-		ini.put( "Display", "height", dm.getHeight() );
-		ini.put( "Display",  "rate", dm.getFrequency() );
+		width = Integer.parseInt( p.getProperty("width") );
+		height = Integer.parseInt( p.getProperty("height") );
 		
-		ini.put( "Display",	"vsync", "true" );
-		ini.put( "Display", "fullscreen", "true" );
-		ini.put( "Display", "showFPS", "true" );
-		boolean widescreen = ( (float) dm.getWidth()/(float) dm.getHeight() >= 16.0f/9.0f )? true : false;
-		ini.put( "Display", "widescreen", widescreen);
-		ini.put( "Display", "scale", "1.00" );
-		
-		ini.put( "Sound", "enabled", "true");
-		
-		ini.store();
+		vsync = Boolean.parseBoolean( p.getProperty("vsync") );
+		fullscreen = Boolean.parseBoolean( p.getProperty("fullscreen") );
+		fps = Boolean.parseBoolean( p.getProperty("showFPS") );
 	}
-	
-	public static void readConfig()
+
+	private static void writeConfig(Properties p)
 	{
-		width = Integer.parseInt( ini.get("Display", "width") );
-		height = Integer.parseInt( ini.get("Display", "height") );
-		//refresh = Integer.parseInt( ini.get("Display", "rate") );
+		p.setProperty( "width", String.valueOf(width) );
+		p.setProperty( "height", String.valueOf(height) );
+		p.setProperty( "rate", String.valueOf( DISPLAY.getFrequency() ) );
 		
-		vsync = Boolean.parseBoolean( ini.get("Display", "vsync") );
-		fullscreen = Boolean.parseBoolean( ini.get("Display", "fullscreen") );
-		fps = Boolean.parseBoolean( ini.get("Display", "showFPS") );
+		p.setProperty( "vsync", String.valueOf(vsync) );
+		p.setProperty( "fullscreen", String.valueOf(fullscreen) );
+		p.setProperty( "showFPS", String.valueOf(fps) );
+		
+		String widescreen = ( (float)width/(float)height >= 16.0f/9.0f )? "true" : "false";
+		p.setProperty( "widescreen", widescreen );
+		
+		p.setProperty( "scale", "1.00" );
+		
+		p.setProperty( "sound", "true" );
+		
+		try
+		{ p.store(new FileOutputStream("shudy.properties"), null); }
+		catch(IOException e)
+		{ e.printStackTrace(); }
 	}
 }

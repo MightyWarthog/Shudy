@@ -13,21 +13,23 @@ import mayflower.Keyboard;
 import mayflower.Mayflower;
 import mayflower.World;
 
-import org.ini4j.Wini;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 public abstract class ShudyWorld extends World
 {
-	public static Wini INI = Utils.getConfig("settings.ini");
+	public static Properties settings = getConfig();
 
-	public static final int WIDTH = Integer.parseInt( INI.get("Display", "width") );
-	public static final int HEIGHT = Integer.parseInt( INI.get("Display", "height") );
-	public static final int RATE = Integer.parseInt( INI.get("Display", "rate") );
+	public static final int WIDTH = Integer.parseInt( settings.getProperty("width") );
+	public static final int HEIGHT = Integer.parseInt( settings.getProperty("height") );
+	public static final int RATE = Integer.parseInt( settings.getProperty("rate") );
 
-	public static boolean VSYNC = Boolean.parseBoolean( INI.get("Display", "vsync") );
-	public static boolean FULLSCREEN = Boolean.parseBoolean( INI.get("Display", "fullscreen") );
-	public static boolean SHOWFPS = Boolean.parseBoolean( INI.get("Display", "showFPS") );
-	public static final boolean WIDESCREEN = Boolean.parseBoolean( INI.get("Display", "widescreen") );
-	public static boolean SOUND = Boolean.parseBoolean( INI.get("Sound", "enabled") );
+	public static boolean vsync = Boolean.parseBoolean( settings.getProperty("vsync") );
+	public static boolean fullscreen = Boolean.parseBoolean( settings.getProperty("fullscreen") );
+	public static boolean showFPS = Boolean.parseBoolean( settings.getProperty("showFPS") );
+	public static final boolean WIDESCREEN = Boolean.parseBoolean( settings.getProperty("widescreen") );
+	public static boolean sound = Boolean.parseBoolean( settings.getProperty("sound") );
 	
 	public static final Image BACKGROUND = (WIDESCREEN)?
 			Utils.getScaledImage("assets/img/worlds/starfield_169.png", WIDTH, HEIGHT) :
@@ -62,9 +64,9 @@ public abstract class ShudyWorld extends World
 			Mayflower.setWorld(new MainMenu());
 		}
 		
-		if ( SOUND && !Utils.MENU_MUSIC.isPlaying() )
+		if ( sound && !Utils.MENU_MUSIC.isPlaying() )
 			Utils.MENU_MUSIC.playLoop();
-		if ( !SOUND && Utils.MENU_MUSIC.isPlaying() )
+		if ( !sound && Utils.MENU_MUSIC.isPlaying() )
 			Utils.MENU_MUSIC.stop();
 	}
 
@@ -80,10 +82,26 @@ public abstract class ShudyWorld extends World
 
 	public static void updateFields()
 	{
-		INI = Utils.getConfig("settings.ini");
-		VSYNC = Boolean.parseBoolean( INI.get("Display", "vsync") );
-		FULLSCREEN = Boolean.parseBoolean( INI.get("Display", "fullscreen") );
-		SHOWFPS = Boolean.parseBoolean( INI.get("Display", "showFPS") );
-		SOUND = Boolean.parseBoolean( INI.get("Sound", "enabled") );
+		//settings = Utils.getConfig("shudy.properties");
+		
+		vsync = Boolean.parseBoolean( settings.getProperty("vsync") );
+		fullscreen = Boolean.parseBoolean( settings.getProperty("fullscreen") );
+		showFPS = Boolean.parseBoolean( settings.getProperty("showFPS") );
+		sound = Boolean.parseBoolean( settings.getProperty("sound") );
+	}
+	
+	private static Properties getConfig()
+	{
+		Properties p = new Properties();
+		try
+		{
+			p.load(new FileInputStream("shudy.properties"));
+			return p;
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

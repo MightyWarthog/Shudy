@@ -1,16 +1,16 @@
 package actors;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import worlds.ShudyWorld;
 
-import engine.Utils;
 import mayflower.Mayflower;
 
 public class ToggleButton extends Label
 {
-	private String section;
 	private String setting;
 	private String extra;
 	private String img;
@@ -19,15 +19,14 @@ public class ToggleButton extends Label
 	
 	private Class<?> c;
 	
-	public ToggleButton(String img, String section, String setting)
+	public ToggleButton(String img, String setting)
 	{
 		super("assets/img/buttons/empty.gif");
 		
-		this.section = section;
 		this.setting = setting;
 		this.img = img;
 		
-		b = Boolean.parseBoolean( ShudyWorld.INI.get(section, setting) );
+		b = Boolean.parseBoolean( ShudyWorld.settings.getProperty(setting) );
 		
 		if ( b )
 			setImage(img+"_on.gif");
@@ -35,9 +34,9 @@ public class ToggleButton extends Label
 			setImage(img+"_off.gif");
 	}
 	
-	public ToggleButton(String img, String section, String setting, Class<?> c, String extra)
+	public ToggleButton(String img, String setting, Class<?> c, String extra)
 	{
-		this(img, section, setting);
+		this(img, setting);
 		this.extra = extra;
 		this.c = c;
 	}
@@ -51,9 +50,12 @@ public class ToggleButton extends Label
 		{
 			b = !b;
 			
-			ShudyWorld.INI.put( section, setting, b );
+			ShudyWorld.settings.setProperty( setting, String.valueOf(b) );
 			
-			Utils.saveConfig(ShudyWorld.INI);
+			try
+			{ ShudyWorld.settings.store( new FileOutputStream("shudy.properties"), null); }
+			catch(IOException e)
+			{ e.printStackTrace(); }
 			
 			ShudyWorld.updateFields();
 			
