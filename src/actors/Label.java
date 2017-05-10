@@ -16,7 +16,7 @@ public class Label extends Actor
 	@Override
 	public void act()
 	{	
-		if ( ShudyWorld.SOUND && Mayflower.mouseClicked(this) )
+		if ( ShudyWorld.sound && Mayflower.mouseClicked(this) )
 			Mayflower.playSound("assets/snd/beep.wav");
 		
 		getWorld().removeObjects( getIntersectingObjects( Star.class ) );
