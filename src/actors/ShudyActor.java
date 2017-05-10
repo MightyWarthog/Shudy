@@ -15,7 +15,16 @@ public abstract class ShudyActor extends Actor
 	}
 	
 	protected void die()
-	{ getWorld().removeObject(this); }
+	{
+		/*
+		try
+		{ this.finalize(); }
+		catch(Throwable e)
+		{ e.printStackTrace(); }
+		*/
+		
+		getWorld().removeObject(this);
+	}
 	
 	protected void damage(int d)
 	{ health -= d; }

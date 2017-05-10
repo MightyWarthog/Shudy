@@ -36,6 +36,15 @@ public class LaserParticle extends Actor
 		moved += (int) move+0.5;
 		
 		if (moved >= 12)
+		{
+			/*
+			try
+			{ this.finalize(); }
+			catch(Throwable e)
+			{ e.printStackTrace(); }
+			*/
+			
 			getWorld().removeObject(this);
+		}
 	}
 }

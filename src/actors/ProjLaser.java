@@ -27,6 +27,17 @@ public class ProjLaser extends Actor
 				e.damage(5);
 				die();
 			}
+		if ( this.isAtEdge() )
+		{
+			/*
+			try
+			{ this.finalize(); }
+			catch(Throwable e)
+			{ e.printStackTrace(); }
+			*/
+			
+			getWorld().removeObject(this);
+		}
 	}
 	
 	private void die()
@@ -39,6 +50,12 @@ public class ProjLaser extends Actor
 		{
 			for ( int i = 0; i < 32; i++ )			
 				w.addObject( new LaserParticle(), x-2, y );
+
+			try
+			{ this.finalize(); }
+			catch(Throwable e)
+			{ e.printStackTrace(); }
+			
 			getWorld().removeObject(this);
 		}
 	}
