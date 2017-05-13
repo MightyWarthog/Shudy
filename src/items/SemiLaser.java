@@ -42,8 +42,7 @@ public class SemiLaser extends Actor implements Weapon
 	@Override
 	public void act()
 	{
-		if ( world == null )
-			world = getWorld();
+		//if ( world == null )
+		//	world = getWorld();
 	}
-
 }

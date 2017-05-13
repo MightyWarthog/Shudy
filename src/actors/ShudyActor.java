@@ -35,6 +35,6 @@ public abstract class ShudyActor extends Actor
 		getWorld().removeObject(this);
 	}
 	
-	protected void damage(int d)
+	public void damage(int d)
 	{ health -= d; }
 }

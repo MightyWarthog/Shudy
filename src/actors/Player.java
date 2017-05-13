@@ -2,7 +2,7 @@ package actors;
 
 import items.AutoLaser;
 import items.SemiLaser;
-
+import items.Weapon;
 import mayflower.Keyboard;
 import mayflower.Mayflower;
 
@@ -32,11 +32,11 @@ public class Player extends ShudyActor
 		// speed control (ARROW_UP/ARROW_DOWN)
 		speed();
 		
-		if ( weapon.getClass() == SemiLaser.class && Mayflower.mousePressed( null ) )
+		if ( weapon.getClass() == AutoLaser.class && Mouse.isButtonDown( 0 ) )
 		{
 			weapon.fire();
 		}
-		else if ( weapon.getClass() == AutoLaser.class && Mouse.isButtonDown( 0 ) )
+		else if ( Mayflower.mousePressed( null ) )
 			weapon.fire();
 	}
 	
@@ -77,4 +77,7 @@ public class Player extends ShudyActor
 
 	public void setHealth(int health)
 	{ this.health = health; }
+
+	public void equip(Weapon w)
+	{ weapon = w; }
 }

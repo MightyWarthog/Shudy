@@ -33,12 +33,9 @@ public class ProjLaser extends Actor
 	}
 	
 	private void die()
-	{
-		int x = getX();
-		int y = getY();
-		
+	{		
 			for ( int i = 0; i < 32; i++ )			
-				world.addObject( new LaserParticle(), x-2, y );
+				world.addObject( new LaserParticle(), getX()-2, getY() );
 
 			/*
 			try

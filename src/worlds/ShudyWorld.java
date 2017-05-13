@@ -9,7 +9,9 @@ import actors.ProjLaser;
 import actors.ShudyActor;
 import actors.Star;
 import engine.Utils;
-
+import items.AutoLaser;
+import items.LaserBlaster;
+import items.SemiLaser;
 import mayflower.Keyboard;
 import mayflower.Mayflower;
 import mayflower.World;
@@ -150,5 +152,14 @@ public abstract class ShudyWorld extends World
 		else if ( cheat.equals("god") )
 			for ( Player p : getObjects( Player.class ) )
 				p.setHealth( Integer.MAX_VALUE );
+		else if ( cheat.equals("shotgun") )
+			for ( Player p : getObjects( Player.class ) )
+				p.equip(new LaserBlaster(p) );
+		else if ( cheat.equals("semi") )
+			for ( Player p : getObjects( Player.class ) )
+				p.equip(new SemiLaser(p) );
+		else if ( cheat.equals("auto") )
+			for ( Player p : getObjects( Player.class ) )
+				p.equip(new AutoLaser(p) );
 	}
 }
