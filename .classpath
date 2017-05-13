@@ -8,5 +8,6 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Shudy/lib/lwjgl/natives/linux"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/jorbis-0.0.17.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

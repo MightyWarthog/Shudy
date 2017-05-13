@@ -18,14 +18,14 @@ public class Grunt extends ShudyActor
 	{
 		super.act();
 		
-		List<Player> players = getObjectsInRange(Integer.MAX_VALUE, Player.class);
+		List<Player> players = world.getObjects( Player.class );
 		if ( players.size() > 0 )
 		{
-			Player p = players.get( (int) ( Math.random() * players.size() ) );
+			Player p = players.get(0);
 			turnTowards(p);
 			
 			if ( !intersects(p) )
-				move(5);
+				move(speed);
 			else
 				p.damage(1);
 		}
@@ -34,7 +34,7 @@ public class Grunt extends ShudyActor
 	@Override
 	protected void die()
 	{
-		((Level1) getWorld()).addPoints(100);
+		((Level1) world).addPoints(100);
 		super.die();
 	}
 }

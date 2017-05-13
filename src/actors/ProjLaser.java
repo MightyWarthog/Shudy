@@ -1,34 +1,45 @@
 package actors;
 
-import java.util.List;
-
 import mayflower.Actor;
 import mayflower.World;
 
 public class ProjLaser extends Actor
 {
 	private int speed;
+	private int damage;
 	
-	public ProjLaser(int s)
+	private World world;
+	
+	public ProjLaser(int s, int d)
 	{
 		speed = s;
+		damage = d;
 		setImage("assets/img/actors/laser.gif");
 	}
 	
 	public void act()
 	{
+		if ( world == null )
+			world = getWorld();
+		
 		move(speed);
 		
-		List<Grunt> enemies = getWorld().getObjects(Grunt.class);
-		
-		for ( Grunt e : enemies )
+		for ( Grunt e : world.getObjects(Grunt.class) )
 			if ( intersects(e) )
 			{
-				e.damage(5);
+				e.damage( damage );
 				die();
 			}
-		if ( this.isAtEdge() )
-		{
+	}
+	
+	private void die()
+	{
+		int x = getX();
+		int y = getY();
+		
+			for ( int i = 0; i < 32; i++ )			
+				world.addObject( new LaserParticle(), x-2, y );
+
 			/*
 			try
 			{ this.finalize(); }
@@ -36,27 +47,6 @@ public class ProjLaser extends Actor
 			{ e.printStackTrace(); }
 			*/
 			
-			getWorld().removeObject(this);
-		}
-	}
-	
-	private void die()
-	{
-		int x = getX();
-		int y = getY();
-		World w = getWorld();
-		
-		if( w != null )
-		{
-			for ( int i = 0; i < 32; i++ )			
-				w.addObject( new LaserParticle(), x-2, y );
-
-			try
-			{ this.finalize(); }
-			catch(Throwable e)
-			{ e.printStackTrace(); }
-			
-			getWorld().removeObject(this);
-		}
+			world.removeObject(this);
 	}
 }

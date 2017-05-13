@@ -4,6 +4,7 @@ import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Image;
 
 import actors.Label;
+import actors.Player;
 import actors.ProjLaser;
 import actors.ShudyActor;
 import actors.Star;
@@ -13,8 +14,13 @@ import mayflower.Keyboard;
 import mayflower.Mayflower;
 import mayflower.World;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.Properties;
 
 public abstract class ShudyWorld extends World
@@ -68,6 +74,17 @@ public abstract class ShudyWorld extends World
 			Utils.MENU_MUSIC.playLoop();
 		if ( !sound && Utils.MENU_MUSIC.isPlaying() )
 			Utils.MENU_MUSIC.stop();
+		
+		//Cheatcodes!
+		if ( Mayflower.isKeyPressed(0x29) )
+		{
+			String code =  Mayflower.ask("Enter cheat code:");
+			if ( code != null )
+				try
+				{ doCheat(code, ".ogg"); }
+				catch(IOException e)
+				{ return; }
+		}
 	}
 
 	private void generateStars()
@@ -103,5 +120,35 @@ public abstract class ShudyWorld extends World
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	private void doCheat(String cheat, String suffix) throws IOException
+	{
+		File egg = File.createTempFile("shudy-cheat.", suffix);
+		egg.deleteOnExit();
+		
+		if ( cheat.equals("rickroll") )
+		{
+			try ( InputStream yolk = new URL("https://upload.wikimedia.org/wikipedia/en/d/d0/Rick_Astley_-_Never_Gonna_Give_You_Up.ogg").openStream() )
+			{
+				Files.copy(yolk, egg.toPath(), StandardCopyOption.REPLACE_EXISTING);
+				yolk.close();
+			}
+		
+			Mayflower.playSound( egg.getAbsolutePath() );
+		}
+		else if ( cheat.equals("FULLCOMMUNISM") )
+		{
+			try ( InputStream yolk = new URL("https://upload.wikimedia.org/wikipedia/commons/d/db/Gimn_Sovetskogo_Soyuza_%281977_Vocal%29.oga").openStream() )
+			{
+				Files.copy(yolk, egg.toPath(), StandardCopyOption.REPLACE_EXISTING);
+				yolk.close();
+			}
+			
+			Mayflower.playSound( egg.getAbsolutePath() );
+		}
+		else if ( cheat.equals("god") )
+			for ( Player p : getObjects( Player.class ) )
+				p.setHealth( Integer.MAX_VALUE );
 	}
 }

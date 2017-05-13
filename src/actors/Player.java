@@ -1,17 +1,21 @@
 package actors;
 
+import items.AutoLaser;
+import items.SemiLaser;
+
 import mayflower.Keyboard;
 import mayflower.Mayflower;
 
+import org.lwjgl.input.Mouse;
+
 public class Player extends ShudyActor
-{
-	static final String LASER_SOUNDS[] = {"assets/snd/laser1.wav", "assets/snd/laser2.wav"};
-	
+{	
 	public Player()
 	{
 		setImage("assets/img/actors/player.gif");
 		speed = 10;
 		health = 100;
+		weapon = new SemiLaser( this );
 	}
 	
 	@Override
@@ -28,14 +32,12 @@ public class Player extends ShudyActor
 		// speed control (ARROW_UP/ARROW_DOWN)
 		speed();
 		
-		if ( Mayflower.mousePressed( null ) )
+		if ( weapon.getClass() == SemiLaser.class && Mayflower.mousePressed( null ) )
 		{
-			ProjLaser laser = new ProjLaser(25);
-			laser.setRotation(getRotation());
-			
-			getWorld().addObject(laser, getCenterX()-getImage().getWidth()/2, getCenterY());
-			Mayflower.playSound( LASER_SOUNDS[(int) (Math.random() * 2)] );
+			weapon.fire();
 		}
+		else if ( weapon.getClass() == AutoLaser.class && Mouse.isButtonDown( 0 ) )
+			weapon.fire();
 	}
 	
 	protected void move()
@@ -72,4 +74,7 @@ public class Player extends ShudyActor
 
 	public int getHealth()
 	{ return health; }
+
+	public void setHealth(int health)
+	{ this.health = health; }
 }

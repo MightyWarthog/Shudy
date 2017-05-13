@@ -11,7 +11,7 @@ import mayflower.MayflowerSound;
 public class Utils
 {
 	public static List<Star> starActors;
-	public static final MayflowerSound MENU_MUSIC = new MayflowerSound("assets/snd/menu_1.wav");
+	public static final MayflowerSound MENU_MUSIC = new MayflowerSound("assets/snd/menu_1.ogg");
 
 	public static Image getScaledImage(String img, int width, int height)
 	{
