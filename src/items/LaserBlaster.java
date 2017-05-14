@@ -35,7 +35,7 @@ public class LaserBlaster extends Actor implements Weapon
 		
 		if ( ammo > 0 && cooldown.isDone() )
 		{
-			for (byte i = 0; i < 18; i++)
+			for (byte i = 0; i < 12; i++)
 				world.addObject( new Pellet(), player.getCenterX() - player.getImage().getWidth()/2 + (int) (Math.random() * 72 - 36), player.getCenterY() + (int) (Math.random() * 72 - 36) );
 			cooldown.set(1000);
 			Mayflower.playSound( "assets/snd/blaster_" + (int) (Math.random() * 4 + 1) + ".ogg" );
