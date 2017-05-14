@@ -9,16 +9,23 @@ public class AutoLaser extends SemiLaser implements Weapon
 	public AutoLaser(Player p)
 	{
 		super( p, 9, 134 );
-		ammo = 200;
+		ammo = 1000;
 	}
 
 	@Override
 	public void fire()
 	{
 		if ( ammo > 0 )
+		{
 			super.fire();
+			ammo--;
+		}
 		else
 			player.equip( new SemiLaser(player) );
 	}
+	
+	@Override
+	public int getAmmo()
+	{ return ammo; }
 
 }
