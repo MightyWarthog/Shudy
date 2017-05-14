@@ -72,7 +72,7 @@ public class Level1 extends ShudyWorld
 		
 		if ( spawner.isDone() )
 		{
-			addObject( new Grunt(50, 8, "assets/img/actors/enemy.gif"), Mayflower.getRandomNumber(WIDTH), Mayflower.getRandomNumber(HEIGHT) );
+			addObject( new Grunt(50, 10, "assets/img/actors/enemy.gif"), Mayflower.getRandomNumber(WIDTH), Mayflower.getRandomNumber(HEIGHT) );
 			spawner.set(2000);
 		}
 	}
