@@ -83,4 +83,7 @@ public class Player extends ShudyActor
 
 	public void heal(int h)
 	{ health += h; }
+
+	public int getAmmo()
+	{ return weapon.getAmmo(); }
 }

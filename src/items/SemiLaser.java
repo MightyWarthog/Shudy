@@ -51,4 +51,8 @@ public class SemiLaser extends Actor implements Weapon
 	@Override
 	public void act()
 	{ }
+
+	@Override
+	public int getAmmo()
+	{ return -1; }
 }

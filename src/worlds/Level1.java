@@ -15,9 +15,11 @@ public class Level1 extends ShudyWorld
 	
 	private int lastPoints;
 	private int lastHealth;
+	private int lastAmmo;
 	
 	private textLabel scoreCard;
 	private textLabel healthCard;
+	private textLabel ammoCard;
 	
 	private Player karel;
 	
@@ -47,8 +49,12 @@ public class Level1 extends ShudyWorld
 		healthCard = new textLabel( new MayflowerImage("Health: " + karel.getHealth(), 36, new Color(0, 136, 0) ) );
 		addObject( healthCard, getWidth() / 2 - 300, getHeight()-50 );
 		
+		ammoCard = new textLabel( new MayflowerImage("Ammo: ∞", 36, new Color(0, 136, 0) ) );
+		addObject( ammoCard, 200, getHeight()-50 );
+		
 		lastHealth = karel.getHealth();
 		lastPoints = 0;
+		lastAmmo = karel.getAmmo();
 		
 		addObject( new HealthPack(), 800, 400 );
 	}
@@ -70,6 +76,15 @@ public class Level1 extends ShudyWorld
 		{
 			healthCard.setImage( new MayflowerImage("Health: " + karel.getHealth(), 36, new Color(0, 136, 0) ) );
 			lastHealth = karel.getHealth();
+		}
+		
+		if ( lastAmmo != karel.getAmmo() )
+		{
+			if ( karel.getAmmo() == -1 )
+				ammoCard.setImage( new MayflowerImage("Ammo: ∞", 36, new Color(0, 136, 0) ) );
+			else
+				ammoCard.setImage( new MayflowerImage("Ammo: " + karel.getAmmo(), 36, new Color(0, 136, 0) ) );
+			lastAmmo = karel.getAmmo();
 		}
 		
 		if ( spawner.isDone() )
