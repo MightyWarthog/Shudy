@@ -5,25 +5,31 @@ import actors.ProjLaser;
 
 import mayflower.Actor;
 import mayflower.Mayflower;
+import mayflower.Timer;
 import mayflower.World;
 
 public class SemiLaser extends Actor implements Weapon
-{
-	protected static final String LASER_SOUNDS[] = {"assets/snd/laser_1.ogg", "assets/snd/laser_2.ogg"};
-	
+{	
 	protected World world;
 	
 	protected Player player;
 	
+	protected Timer cooldown;
+	
+	protected int cooldownInMilis;
+	
 	private int damage;
 	
 	public SemiLaser( Player p)
-	{ this(p, 10); }
+	{ this( p, 10, 200 ); }
 	
-	protected SemiLaser( Player p, int d )
+	protected SemiLaser( Player p, int d, int milis )
 	{
 		player = p;
 		damage = d;
+		cooldown = new Timer();
+		cooldownInMilis = milis;
+		world = player.getWorld();
 	}
 	
 	@Override
@@ -32,17 +38,17 @@ public class SemiLaser extends Actor implements Weapon
 		if ( world == null )
 			world = player.getWorld();
 		
-		ProjLaser laser = new ProjLaser(25, damage);
-		
-		laser.setRotation(  player.getRotation() );
-		world.addObject( laser, player.getCenterX()-player.getImage().getWidth()/2, player.getCenterY() );
-		Mayflower.playSound( LASER_SOUNDS[ (int) (Math.random() * 2) ] );
+		if ( cooldown.isDone() )
+		{
+			ProjLaser laser = new ProjLaser(25, damage);
+			laser.setRotation(  player.getRotation() );
+			world.addObject( laser, player.getCenterX()-player.getImage().getWidth()/2, player.getCenterY() );
+			cooldown.set( cooldownInMilis );
+			Mayflower.playSound( "assets/snd/laser_" + (int) ( Math.random() * 2 + 1 ) + ".ogg" );
+		}
 	}
 
 	@Override
 	public void act()
-	{
-		//if ( world == null )
-		//	world = getWorld();
-	}
+	{ }
 }

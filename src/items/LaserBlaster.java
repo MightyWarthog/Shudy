@@ -18,10 +18,13 @@ public class LaserBlaster extends Actor implements Weapon
 	
 	private Timer cooldown;
 	
+	private int ammo;
+	
 	public LaserBlaster(Player p)
 	{
 		player = p;
 		cooldown = new Timer();
+		ammo = 50;
 	}
 
 	@Override
@@ -30,13 +33,16 @@ public class LaserBlaster extends Actor implements Weapon
 		if ( world == null )
 			world = player.getWorld();
 		
-		if ( cooldown.isDone() )
+		if ( ammo > 0 && cooldown.isDone() )
 		{
 			for (byte i = 0; i < 18; i++)
 				world.addObject( new Pellet(), player.getCenterX() - player.getImage().getWidth()/2 + (int) (Math.random() * 72 - 36), player.getCenterY() + (int) (Math.random() * 72 - 36) );
 			cooldown.set(1000);
 			Mayflower.playSound( "assets/snd/blaster_" + (int) (Math.random() * 4 + 1) + ".ogg" );
+			ammo--;
 		}
+		else if ( ammo <= 0 )
+			player.equip( new SemiLaser(player) );
 	}
 
 	@Override
@@ -45,9 +51,9 @@ public class LaserBlaster extends Actor implements Weapon
 
 	private class Pellet extends Actor
 	{
-		int moved;
+		private int moved;
 		
-		public Pellet()
+		private Pellet()
 		{
 			setImage("assets/img/actors/shotgun_ammo.gif");
 			setRotation( player.getRotation() );
@@ -64,10 +70,8 @@ public class LaserBlaster extends Actor implements Weapon
 					die();
 				}
 			
-			double move = Math.random() * 12;
-			
-			move( move );
-			moved += (int) move+0.5;
+			move( 15 );
+			moved += 15;
 			
 			if (moved >= 384)
 				world.removeObject(this);
