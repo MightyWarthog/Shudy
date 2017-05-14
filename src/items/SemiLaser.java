@@ -21,7 +21,7 @@ public class SemiLaser extends Actor implements Weapon
 	private int damage;
 	
 	public SemiLaser( Player p)
-	{ this( p, 10, 200 ); }
+	{ this( p, 10, 175 ); }
 	
 	protected SemiLaser( Player p, int d, int milis )
 	{
