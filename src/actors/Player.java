@@ -80,4 +80,7 @@ public class Player extends ShudyActor
 
 	public void equip(Weapon w)
 	{ weapon = w; }
+
+	public void heal(int h)
+	{ health += h; }
 }

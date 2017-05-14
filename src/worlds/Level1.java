@@ -2,7 +2,7 @@ package worlds;
 
 import actors.Grunt;
 import actors.Player;
-
+import items.HealthPack;
 import mayflower.Actor;
 import mayflower.Color;
 import mayflower.Mayflower;
@@ -49,6 +49,8 @@ public class Level1 extends ShudyWorld
 		
 		lastHealth = karel.getHealth();
 		lastPoints = 0;
+		
+		addObject( new HealthPack(), 800, 400 );
 	}
 	
 	@Override
