@@ -24,7 +24,7 @@ public class LaserBlaster extends Actor implements Weapon
 	{
 		player = p;
 		cooldown = new Timer();
-		ammo = 50;
+		ammo = 24;
 	}
 
 	@Override
@@ -85,4 +85,8 @@ public class LaserBlaster extends Actor implements Weapon
 			world.removeObject(this);
 		}
 	}
+
+	@Override
+	public int getAmmo()
+	{ return ammo; }
 }
