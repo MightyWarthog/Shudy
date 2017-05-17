@@ -1,5 +1,6 @@
 package items;
 
+import worlds.ShudyWorld;
 import actors.Grunt;
 import actors.LaserParticle;
 import actors.Player;
@@ -37,8 +38,12 @@ public class LaserBlaster extends Actor implements Weapon
 		{
 			for (byte i = 0; i < 12; i++)
 				world.addObject( new Pellet(), player.getCenterX() - player.getImage().getWidth()/2 + (int) (Math.random() * 72 - 36), player.getCenterY() + (int) (Math.random() * 72 - 36) );
+			
 			cooldown.set(1000);
-			Mayflower.playSound( "assets/snd/blaster_" + (int) (Math.random() * 4 + 1) + ".ogg" );
+			
+			if ( ShudyWorld.sound )
+				Mayflower.playSound( "assets/snd/blaster_" + (int) (Math.random() * 4 + 1) + ".ogg" );
+			
 			ammo--;
 		}
 		else if ( ammo <= 0 )
@@ -49,6 +54,14 @@ public class LaserBlaster extends Actor implements Weapon
 	public void act()
 	{ }
 
+	@Override
+	public int getAmmo()
+	{ return ammo; }
+	
+	@Override
+	public void setAmmo(int a)
+	{ ammo = a; }
+	
 	private class Pellet extends Actor
 	{
 		private int moved;
@@ -85,8 +98,4 @@ public class LaserBlaster extends Actor implements Weapon
 			world.removeObject(this);
 		}
 	}
-
-	@Override
-	public int getAmmo()
-	{ return ammo; }
 }

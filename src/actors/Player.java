@@ -86,4 +86,7 @@ public class Player extends ShudyActor
 
 	public int getAmmo()
 	{ return weapon.getAmmo(); }
+
+	public void setAmmo(int a)
+	{ weapon.setAmmo(a); }
 }

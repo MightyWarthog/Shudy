@@ -1,5 +1,6 @@
 package items;
 
+import worlds.ShudyWorld;
 import actors.Player;
 import actors.ProjLaser;
 
@@ -44,7 +45,9 @@ public class SemiLaser extends Actor implements Weapon
 			laser.setRotation(  player.getRotation() );
 			world.addObject( laser, player.getCenterX()-player.getImage().getWidth()/2, player.getCenterY() );
 			cooldown.set( cooldownInMilis );
-			Mayflower.playSound( "assets/snd/laser_" + (int) ( Math.random() * 2 + 1 ) + ".ogg" );
+			
+			if ( ShudyWorld.sound )
+				Mayflower.playSound( "assets/snd/laser_" + (int) ( Math.random() * 2 + 1 ) + ".ogg" );
 		}
 	}
 
@@ -55,4 +58,8 @@ public class SemiLaser extends Actor implements Weapon
 	@Override
 	public int getAmmo()
 	{ return -1; }
+	
+	@Override
+	public void setAmmo(int a)
+	{ }
 }

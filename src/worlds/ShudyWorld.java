@@ -129,7 +129,7 @@ public abstract class ShudyWorld extends World
 		File egg = File.createTempFile("shudy-cheat.", suffix);
 		egg.deleteOnExit();
 		
-		if ( cheat.equals("rickroll") )
+		if ( sound && cheat.equals("rickroll") )
 		{
 			try ( InputStream yolk = new URL("https://upload.wikimedia.org/wikipedia/en/d/d0/Rick_Astley_-_Never_Gonna_Give_You_Up.ogg").openStream() )
 			{
@@ -139,7 +139,7 @@ public abstract class ShudyWorld extends World
 		
 			Mayflower.playSound( egg.getAbsolutePath() );
 		}
-		else if ( cheat.equals("FULLCOMMUNISM") )
+		else if ( sound && cheat.equals("FULLCOMMUNISM") )
 		{
 			try ( InputStream yolk = new URL("https://upload.wikimedia.org/wikipedia/commons/d/db/Gimn_Sovetskogo_Soyuza_%281977_Vocal%29.oga").openStream() )
 			{
@@ -151,7 +151,10 @@ public abstract class ShudyWorld extends World
 		}
 		else if ( cheat.equals("god") )
 			for ( Player p : getObjects( Player.class ) )
+			{
 				p.setHealth( Integer.MAX_VALUE );
+				p.setAmmo( Integer.MAX_VALUE );
+			}
 		else if ( cheat.equals("shotgun") )
 			for ( Player p : getObjects( Player.class ) )
 				p.equip(new LaserBlaster(p) );

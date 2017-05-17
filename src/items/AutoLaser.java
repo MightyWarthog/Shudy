@@ -28,4 +28,7 @@ public class AutoLaser extends SemiLaser implements Weapon
 	public int getAmmo()
 	{ return ammo; }
 
+	@Override
+	public void setAmmo(int a)
+	{ ammo = a; }
 }
