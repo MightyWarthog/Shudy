@@ -12,7 +12,6 @@ import engine.Utils;
 import items.AutoLaser;
 import items.LaserBlaster;
 import items.SemiLaser;
-
 import mayflower.Keyboard;
 import mayflower.Mayflower;
 import mayflower.World;
@@ -78,7 +77,7 @@ public abstract class ShudyWorld extends World
 		if ( !sound && Utils.MENU_MUSIC.isPlaying() )
 			Utils.MENU_MUSIC.stop();
 		
-		//Cheat codes!
+		//Cheatcodes!
 		if ( Mayflower.isKeyPressed(0x29) )
 		{
 			String code =  Mayflower.ask("Enter cheat code:");
@@ -86,7 +85,7 @@ public abstract class ShudyWorld extends World
 				try
 				{ doCheat(code, ".ogg"); }
 				catch(IOException e)
-				{ e.printStackTrace(); }
+				{ return; }
 		}
 	}
 
@@ -148,10 +147,6 @@ public abstract class ShudyWorld extends World
 				yolk.close();
 			}
 			
-			//Because Mayflower.setVolume() doesn't work...
-			//This introduces some clicking sounds every few seconds during play
-			Mayflower.playSound( egg.getAbsolutePath() );
-			Mayflower.playSound( egg.getAbsolutePath() );
 			Mayflower.playSound( egg.getAbsolutePath() );
 		}
 		else if ( cheat.equals("god") )
