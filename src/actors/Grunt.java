@@ -6,11 +6,19 @@ import worlds.Level1;
 
 public class Grunt extends ShudyActor
 {
-	public Grunt(int h, int s, String img)
+	private boolean menu;
+	
+	public Grunt(int h, int s, String img, boolean m)
 	{
 		health = h;
 		speed = s;
 		setImage(img);
+		menu = m;
+	}
+	
+	public Grunt(int h, int s, String img)
+	{
+		this(h, s, img, false);
 	}
 
 	@Override
@@ -18,23 +26,41 @@ public class Grunt extends ShudyActor
 	{
 		super.act();
 		
-		List<Player> players = world.getObjects( Player.class );
-		if ( players.size() > 0 )
+		if ( !menu )
 		{
-			Player p = players.get(0);
-			turnTowards(p);
+			List<Player> players = world.getObjects( Player.class );
+			if ( players.size() > 0 )
+			{
+				Player p = players.get(0);
+				turnTowards(p);
 			
-			if ( !intersects(p) )
-				move(speed);
-			else
-				p.damage(1);
+				if ( !intersects(p) )
+					move(speed);
+				else
+					p.damage(1);
+			}
+		}
+		else
+		{
+			List<Grunt> grunts = world.getObjects( Grunt.class );
+			if ( grunts.size() > 0 )
+			{
+				Grunt g = grunts.get( (int) ( Math.random() * grunts.size() ) );
+				turnTowards(g);
+			
+				if ( !intersects(g) )
+					move(speed);
+				else
+					g.damage(1);
+			}
 		}
 	}
 	
 	@Override
 	protected void die()
 	{
-		((Level1) world).addPoints(100);
+		if ( !menu )
+			((Level1) world).addPoints(100);
 		super.die();
 	}
 }
