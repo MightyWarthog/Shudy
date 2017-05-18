@@ -2,6 +2,7 @@ package worlds;
 
 import actors.Grunt;
 import actors.Player;
+import engine.Settings;
 import items.HealthPack;
 import mayflower.Color;
 import mayflower.Label;
@@ -46,13 +47,16 @@ public class Level1 extends ShudyWorld
 	{
 		super.act();
 		
-		healthCard.setText( String.valueOf( karel.getHealth() ) );
-		scoreCard.setText( String.valueOf( points ) );
-		ammoCard.setText( String.valueOf( karel.getAmmo() ) );
+		healthCard.setText( "Health: " + String.valueOf( karel.getHealth() ) );
+		scoreCard.setText( "Score: " + String.valueOf( points ) );
+		if ( karel.getAmmo() == -1 )
+			ammoCard.setText( "Ammo: \u221e" );
+		else
+			ammoCard.setText( "Ammo: " + String.valueOf( karel.getAmmo() ) );
 		
 		if ( spawner.isDone() )
 		{
-			addObject( new Grunt(50, 10, "assets/img/actors/enemy.gif"), Mayflower.getRandomNumber(WIDTH), Mayflower.getRandomNumber(HEIGHT) );
+			addObject( new Grunt(50, 10, "assets/img/actors/enemy.gif"), Mayflower.getRandomNumber( Settings.WIDTH ), Mayflower.getRandomNumber( Settings.HEIGHT ) );
 			spawner.set(2000);
 		}
 	}

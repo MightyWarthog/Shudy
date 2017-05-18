@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import engine.Settings;
 import worlds.ShudyWorld;
 
 import mayflower.Mayflower;
@@ -26,7 +27,7 @@ public class ToggleButton extends Label
 		this.setting = setting;
 		this.img = img;
 		
-		b = Boolean.parseBoolean( ShudyWorld.settings.getProperty(setting) );
+		b = Boolean.parseBoolean( Settings.SETTINGS.getProperty(setting) );
 		
 		if ( b )
 			setImage(img+"_on.gif");
@@ -50,10 +51,10 @@ public class ToggleButton extends Label
 		{
 			b = !b;
 			
-			ShudyWorld.settings.setProperty( setting, String.valueOf(b) );
+			Settings.SETTINGS.setProperty( setting, String.valueOf(b) );
 			
-			try
-			{ ShudyWorld.settings.store( new FileOutputStream("shudy.properties"), null); }
+			try ( FileOutputStream config = new FileOutputStream("shudy.properties") )
+			{ Settings.SETTINGS.store( config, null); }
 			catch(IOException e)
 			{ e.printStackTrace(); }
 			

@@ -1,9 +1,8 @@
 package items;
 
-import worlds.ShudyWorld;
 import actors.Player;
 import actors.ProjLaser;
-
+import engine.Settings;
 import mayflower.Actor;
 import mayflower.Mayflower;
 import mayflower.Timer;
@@ -46,7 +45,7 @@ public class SemiLaser extends Actor implements Weapon
 			world.addObject( laser, player.getCenterX()-player.getImage().getWidth()/2, player.getCenterY() );
 			cooldown.set( cooldownInMilis );
 			
-			if ( ShudyWorld.sound )
+			if ( Settings.SOUND )
 				Mayflower.playSound( "assets/snd/laser_" + (int) ( Math.random() * 2 + 1 ) + ".ogg" );
 		}
 	}

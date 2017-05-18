@@ -1,10 +1,9 @@
 package items;
 
-import worlds.ShudyWorld;
 import actors.Grunt;
 import actors.LaserParticle;
 import actors.Player;
-
+import engine.Settings;
 import mayflower.Actor;
 import mayflower.Mayflower;
 import mayflower.Timer;
@@ -41,7 +40,7 @@ public class LaserBlaster extends Actor implements Weapon
 			
 			cooldown.set(1000);
 			
-			if ( ShudyWorld.sound )
+			if ( Settings.SOUND )
 				Mayflower.playSound( "assets/snd/blaster_" + (int) (Math.random() * 4 + 1) + ".ogg" );
 			
 			ammo--;

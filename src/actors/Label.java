@@ -1,9 +1,9 @@
 package actors;
 
+import engine.Settings;
 import mayflower.Actor;
 import mayflower.Mayflower;
 import mayflower.MayflowerImage;
-import worlds.ShudyWorld;
 
 public class Label extends Actor
 {
@@ -16,7 +16,7 @@ public class Label extends Actor
 	@Override
 	public void act()
 	{	
-		if ( ShudyWorld.sound && Mayflower.mouseClicked(this) )
+		if ( Settings.SOUND && Mayflower.mouseClicked(this) )
 			Mayflower.playSound("assets/snd/beep.ogg");
 		
 		getWorld().removeObjects( getIntersectingObjects( Star.class ) );
