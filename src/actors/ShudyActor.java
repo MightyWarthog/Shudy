@@ -32,7 +32,7 @@ public abstract class ShudyActor extends Actor
 		{ e.printStackTrace(); }
 		*/
 		
-		getWorld().removeObject(this);
+		world.removeObject(this);
 	}
 	
 	public void damage(int d)
