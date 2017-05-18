@@ -20,12 +20,14 @@ public class Level1 extends ShudyWorld
 	private Player karel;
 	
 	private Timer spawner;
+	private Timer medkit;
 	
 	public Level1()
 	{
 		points = 0;
 		
 		spawner = new Timer(3000);
+		medkit = new Timer(60000);
 		
 		karel = new Player();
 		addObject(karel, 400, 300);
@@ -57,7 +59,14 @@ public class Level1 extends ShudyWorld
 		if ( spawner.isDone() )
 		{
 			addObject( new Grunt(50, 10, "assets/img/actors/enemy.gif"), Mayflower.getRandomNumber( Settings.WIDTH ), Mayflower.getRandomNumber( Settings.HEIGHT ) );
-			spawner.set(2000);
+			spawner.reset();
+		}
+		
+		if ( medkit.isDone() )
+		{
+			if ( Mayflower.getRandomNumber(2) == 1 )
+				addObject( new HealthPack(), Mayflower.getRandomNumber(Settings.WIDTH), Mayflower.getRandomNumber(Settings.HEIGHT) );
+			medkit.reset();
 		}
 	}
 	
