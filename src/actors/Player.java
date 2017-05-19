@@ -1,12 +1,12 @@
 package actors;
 
+import worlds.EndWorld;
 import items.AutoLaser;
 import items.SemiLaser;
 import items.Weapon;
+
 import mayflower.Keyboard;
 import mayflower.Mayflower;
-
-import org.lwjgl.input.Mouse;
 
 public class Player extends ShudyActor
 {	
@@ -32,10 +32,9 @@ public class Player extends ShudyActor
 		// speed control (ARROW_UP/ARROW_DOWN)
 		speed();
 		
-		if ( weapon.getClass() == AutoLaser.class && Mouse.isButtonDown( 0 ) )
-		{
+		//if ( weapon.getClass() == AutoLaser.class && Mouse.isButtonDown( 0 ) )
+		if ( weapon instanceof AutoLaser && Mayflower.getMouseInfo().getButton() == 0 )
 			weapon.fire();
-		}
 		else if ( Mayflower.mousePressed( null ) )
 			weapon.fire();
 	}
@@ -89,4 +88,11 @@ public class Player extends ShudyActor
 
 	public void setAmmo(int a)
 	{ weapon.setAmmo(a); }
+	
+	@Override
+	public void die()
+	{
+		super.die();
+		Mayflower.setWorld( new EndWorld() );
+	}
 }
