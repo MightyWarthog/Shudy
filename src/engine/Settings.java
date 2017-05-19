@@ -27,6 +27,5 @@ public final class Settings
 	public static boolean VSYNC = Boolean.parseBoolean( SETTINGS.getProperty("vsync") );
 	public static boolean FULLSCREEN = Boolean.parseBoolean( SETTINGS.getProperty("fullscreen") );
 	public static boolean SHOWFPS = Boolean.parseBoolean( SETTINGS.getProperty("showFPS") );
-	
 	public static boolean SOUND = Boolean.parseBoolean( SETTINGS.getProperty("sound") );
 }
