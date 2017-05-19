@@ -27,7 +27,7 @@ public class Level1 extends ShudyWorld
 		points = 0;
 		
 		spawner = new Timer(3000);
-		medkit = new Timer(60000);
+		medkit = new Timer(30000);
 		
 		karel = new Player();
 		addObject(karel, 400, 300);
@@ -39,9 +39,7 @@ public class Level1 extends ShudyWorld
 		addObject( healthCard, getWidth() / 2 - 300, getHeight()-50 );
 		
 		ammoCard = new Label( "Ammo: \u221e", 36, new Color(0, 136, 0) );
-		addObject( ammoCard, 200, getHeight()-50 );
-		
-		addObject( new HealthPack(), 800, 400 );
+		addObject( ammoCard, 200, getHeight() - 50 );
 	}
 	
 	@Override
