@@ -4,8 +4,9 @@
 - [ ] planet and supernova actors
 - [ ] add screenshot to [README.md](README.md)
 - [ ] teleport to other side when touching edge
-- [ ] more enemy classes
-- [ ] endgame screen
+- [x] more enemy classes
+- [x] endgame screen
 - [ ] fix AutoLaser using too much ammo
 - [ ] highscores
 - [ ] fix mouse pointer derp
+- [ ] maybe only use one instance (MayflowerMusic) of bullet sounds?
