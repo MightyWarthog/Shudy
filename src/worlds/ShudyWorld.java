@@ -110,20 +110,14 @@ public abstract class ShudyWorld extends World
 		if ( Settings.SOUND && cheat.equals("rickroll") )
 		{
 			try ( InputStream yolk = new URL("https://upload.wikimedia.org/wikipedia/en/d/d0/Rick_Astley_-_Never_Gonna_Give_You_Up.ogg").openStream() )
-			{
-				Files.copy(yolk, egg.toPath(), StandardCopyOption.REPLACE_EXISTING);
-				yolk.close();
-			}
+			{ Files.copy(yolk, egg.toPath(), StandardCopyOption.REPLACE_EXISTING); }
 		
 			Mayflower.playSound( egg.getAbsolutePath() );
 		}
 		else if ( Settings.SOUND && cheat.equals("FULLCOMMUNISM") )
 		{
 			try ( InputStream yolk = new URL("https://upload.wikimedia.org/wikipedia/commons/d/db/Gimn_Sovetskogo_Soyuza_%281977_Vocal%29.oga").openStream() )
-			{
-				Files.copy(yolk, egg.toPath(), StandardCopyOption.REPLACE_EXISTING);
-				yolk.close();
-			}
+			{ Files.copy(yolk, egg.toPath(), StandardCopyOption.REPLACE_EXISTING); }
 			
 			Mayflower.playSound( egg.getAbsolutePath() );
 		}
@@ -142,5 +136,8 @@ public abstract class ShudyWorld extends World
 		else if ( cheat.equals("auto") )
 			for ( Player p : getObjects( Player.class ) )
 				p.equip(new AutoLaser(p) );
+		else if ( cheat.equals("levelup") )
+			for ( Player p : getObjects( Player.class ) )
+				((Level1) p.getWorld()).addPoints(500);
 	}
 }
