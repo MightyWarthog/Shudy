@@ -24,17 +24,11 @@ public abstract class ShudyActor extends Actor
 	}
 	
 	protected void die()
-	{
-		/*
-		try
-		{ this.finalize(); }
-		catch(Throwable e)
-		{ e.printStackTrace(); }
-		*/
-		
-		world.removeObject(this);
-	}
+	{ world.removeObject(this); }
 	
 	public void damage(int d)
 	{ health -= d; }
+	
+	public void equip(Weapon w)
+	{ weapon = w; }
 }

@@ -36,8 +36,13 @@ public class MenuRobot extends Grunt
 		}
 		
 		turnTowards( target );
+
 		if ( !intersects( target ) )
+		{
 			move(speed);
+			if ( weapon != null )
+				weapon.fire();
+		}
 		else
 			target.damage(5);
 	}
