@@ -1,9 +1,10 @@
 package items;
 
-import actors.Grunt;
 import actors.LaserParticle;
-import actors.Player;
+import actors.MenuRobot;
+import actors.ShudyActor;
 import engine.Settings;
+
 import mayflower.Actor;
 import mayflower.Mayflower;
 import mayflower.Timer;
@@ -12,7 +13,7 @@ import mayflower.World;
 public class LaserBlaster extends Actor implements Weapon
 {
 
-	private Player player;
+	private ShudyActor actor;
 	
 	private World world;
 	
@@ -20,9 +21,9 @@ public class LaserBlaster extends Actor implements Weapon
 	
 	private int ammo;
 	
-	public LaserBlaster(Player p)
+	public LaserBlaster(ShudyActor a)
 	{
-		player = p;
+		actor = a;
 		cooldown = new Timer();
 		ammo = 24;
 	}
@@ -31,22 +32,22 @@ public class LaserBlaster extends Actor implements Weapon
 	public void fire()
 	{
 		if ( world == null )
-			world = player.getWorld();
+			world = actor.getWorld();
 		
 		if ( ammo > 0 && cooldown.isDone() )
 		{
 			for (byte i = 0; i < 12; i++)
-				world.addObject( new Pellet(), player.getCenterX() - player.getImage().getWidth()/2 + (int) (Math.random() * 72 - 36), player.getCenterY() + (int) (Math.random() * 72 - 36) );
+				world.addObject( new Pellet(), actor.getCenterX() - actor.getImage().getWidth() / 2 + (int) ( Math.random() * 72 - 36 ), actor.getCenterY() + (int) ( Math.random() * 72 - 36 ) );
 			
 			cooldown.set(1000);
 			
-			if ( Settings.SOUND )
+			if ( !( actor instanceof MenuRobot) && Settings.SOUND )
 				Mayflower.playSound( "assets/snd/blaster_" + (int) (Math.random() * 4 + 1) + ".ogg" );
 			
 			ammo--;
 		}
 		else if ( ammo <= 0 )
-			player.equip( new SemiLaser(player) );
+			actor.equip( new SemiLaser(actor) );
 	}
 
 	@Override
@@ -68,19 +69,19 @@ public class LaserBlaster extends Actor implements Weapon
 		private Pellet()
 		{
 			setImage("assets/img/actors/shotgun_ammo.gif");
-			setRotation( player.getRotation() );
+			setRotation( actor.getRotation() );
 			moved = 0;
 		}
 
 		@Override
 		public void act()
 		{
-			for ( Grunt e : world.getObjects(Grunt.class) )
-				if ( intersects(e) )
-				{
-					e.damage( 6 );
-					die();
-				}
+			ShudyActor a = getOneIntersectingObject( ShudyActor.class );
+			if ( a != null && !a.equals(actor) )
+			{
+				a.damage( 6 );
+				die();
+			}
 			
 			move( 15 );
 			moved += 15;

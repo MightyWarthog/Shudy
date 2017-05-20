@@ -1,8 +1,10 @@
 package items;
 
-import actors.Player;
+import actors.MenuRobot;
 import actors.ProjLaser;
+import actors.ShudyActor;
 import engine.Settings;
+
 import mayflower.Actor;
 import mayflower.Mayflower;
 import mayflower.Timer;
@@ -12,7 +14,7 @@ public class SemiLaser extends Actor implements Weapon
 {	
 	protected World world;
 	
-	protected Player player;
+	protected ShudyActor actor;
 	
 	protected Timer cooldown;
 	
@@ -20,32 +22,31 @@ public class SemiLaser extends Actor implements Weapon
 	
 	private int damage;
 	
-	public SemiLaser( Player p)
-	{ this( p, 10, 175 ); }
+	public SemiLaser( ShudyActor a )
+	{ this( a, 10, 175 ); }
 	
-	protected SemiLaser( Player p, int d, int milis )
+	public SemiLaser( ShudyActor a, int d, int milis )
 	{
-		player = p;
+		actor = a;
 		damage = d;
 		cooldown = new Timer();
 		cooldownInMilis = milis;
-		world = player.getWorld();
 	}
 	
 	@Override
 	public void fire()
 	{
 		if ( world == null )
-			world = player.getWorld();
+			world = actor.getWorld();
 		
 		if ( cooldown.isDone() )
 		{
-			ProjLaser laser = new ProjLaser(25, damage);
-			laser.setRotation(  player.getRotation() );
-			world.addObject( laser, player.getCenterX()-player.getImage().getWidth()/2, player.getCenterY() );
+			ProjLaser laser = new ProjLaser(25, damage, actor);
+			laser.setRotation(  actor.getRotation() );
+			world.addObject( laser, actor.getCenterX() - actor.getImage().getWidth() / 2, actor.getCenterY() );
 			cooldown.set( cooldownInMilis );
 			
-			if ( Settings.SOUND )
+			if (  !( actor instanceof MenuRobot ) && Settings.SOUND )
 				Mayflower.playSound( "assets/snd/laser_" + (int) ( Math.random() * 2 + 1 ) + ".ogg" );
 		}
 	}
