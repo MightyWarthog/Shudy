@@ -1,9 +1,12 @@
 package worlds;
 
+import actors.Elite;
 import actors.Grunt;
 import actors.Player;
 import engine.Settings;
+import items.AutoLaser;
 import items.HealthPack;
+import items.LaserBlaster;
 import mayflower.Color;
 import mayflower.Label;
 import mayflower.Mayflower;
@@ -26,7 +29,7 @@ public class Level1 extends ShudyWorld
 	{
 		points = 0;
 		
-		spawner = new Timer(3000);
+		spawner = new Timer(4000);
 		medkit = new Timer(30000);
 		
 		karel = new Player();
@@ -56,7 +59,23 @@ public class Level1 extends ShudyWorld
 		
 		if ( spawner.isDone() )
 		{
-			addObject( new Grunt(50, 10, "assets/img/actors/enemy.gif"), Mayflower.getRandomNumber( Settings.WIDTH ), Mayflower.getRandomNumber( Settings.HEIGHT ) );
+			if ( points < 1000 )
+				addObject( new Grunt( 50, 10, "assets/img/actors/enemy.gif" ), Mayflower.getRandomNumber( Settings.WIDTH ), Mayflower.getRandomNumber( Settings.HEIGHT ) );
+			else if ( points < 2000)
+				addObject( new Elite( 50, 8, 768, "assets/img/actors/enemy.gif" ), Mayflower.getRandomNumber( Settings.WIDTH ), Mayflower.getRandomNumber( Settings.HEIGHT ) );
+			else if ( points <= 2500 )
+			{
+				Elite e = new Elite( 50, 8, 512, "assets/img/actors/enemy.gif" );
+				e.equip( new AutoLaser(e, 2, 200) );
+				addObject( e, Mayflower.getRandomNumber( Settings.WIDTH ), Mayflower.getRandomNumber( Settings.HEIGHT ) );
+			}
+			else
+			{
+				Elite e = new Elite( 50, 8, 384, "assets/img/actors/enemy.gif" );
+				e.equip( new LaserBlaster(e) );
+				addObject( e, Mayflower.getRandomNumber( Settings.WIDTH ), Mayflower.getRandomNumber( Settings.HEIGHT ) );
+			}
+			
 			spawner.reset();
 		}
 		
