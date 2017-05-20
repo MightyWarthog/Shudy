@@ -3,7 +3,6 @@ package actors;
 import worlds.EndWorld;
 import items.AutoLaser;
 import items.SemiLaser;
-import items.Weapon;
 
 import mayflower.Keyboard;
 import mayflower.Mayflower;
@@ -76,9 +75,6 @@ public class Player extends ShudyActor
 
 	public void setHealth(int health)
 	{ this.health = health; }
-
-	public void equip(Weapon w)
-	{ weapon = w; }
 
 	public void heal(int h)
 	{ health += h; }
