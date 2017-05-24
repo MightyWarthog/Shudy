@@ -20,14 +20,15 @@ public class Star extends Actor
 	{
 		setRotation( (int) ( Math.random() * 361 ) );
 		
-		if ( TRANSPARENCY % 4 == 0 )
-			img = new MayflowerImage("assets/img/actors/star32x32.gif");
-		else if ( TRANSPARENCY % 4 == 1 )
-			img = new MayflowerImage("assets/img/actors/star16x16.gif");
-		else if ( TRANSPARENCY % 4 == 3 )
-			img = new MayflowerImage("assets/img/actors/star16x16.gif");
-		else
-			img = new MayflowerImage("assets/img/actors/star16x16.gif");
+		switch( TRANSPARENCY % 4 )
+		{
+			case 0:
+				img = new MayflowerImage("assets/img/actors/star32x32.gif");
+				break;
+			default:
+				img = new MayflowerImage("assets/img/actors/star16x16.gif");
+				break;
+		}
 		
 		img.setTransparency(TRANSPARENCY);
 		setImage(img);
