@@ -1,14 +1,10 @@
 package actors;
 
-import java.util.ArrayList;
-
 import mayflower.Actor;
 
 public class LaserParticle extends Actor
-{
-	ArrayList<Integer> randomNumbers;
-	
-	int moved;
+{	
+	private int moved;
 	
 	public LaserParticle()
 	{
@@ -16,14 +12,7 @@ public class LaserParticle extends Actor
 		
 		setImage("assets/img/actors/"+images[ (int) (Math.random() * images.length) ]);
 		
-		randomNumbers = new ArrayList<Integer>();
-		for ( int i = 0; i < 360; i++ )
-			randomNumbers.add(i);
-		
-		int random = randomNumbers.get( (int) (Math.random() * randomNumbers.size()) );
-		randomNumbers.remove(random);
-		
-		setRotation( random );
+		setRotation( (int) ( Math.random() * 360 + 1 ) );
 		moved = 0;
 	}
 
@@ -36,15 +25,6 @@ public class LaserParticle extends Actor
 		moved += (int) move+0.5;
 		
 		if (moved >= 12)
-		{
-			/*
-			try
-			{ this.finalize(); }
-			catch(Throwable e)
-			{ e.printStackTrace(); }
-			*/
-			
 			getWorld().removeObject(this);
-		}
 	}
 }
