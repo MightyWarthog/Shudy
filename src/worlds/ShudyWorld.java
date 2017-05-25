@@ -78,7 +78,7 @@ public abstract class ShudyWorld extends World
 			String code =  Mayflower.ask("Enter cheat code:");
 			if ( code != null )
 				try
-				{ doCheat(code, ".ogg"); }
+				{ doCheat(code); }
 				catch(IOException e)
 				{ return; }
 		}
@@ -89,7 +89,7 @@ public abstract class ShudyWorld extends World
 		for ( int w = 0; w < Settings.WIDTH; w += 64 )
 			for ( int h = 0; h < Settings.HEIGHT; h += 64 )
 			{
-				Star s = new Star(w + (int) ( Math.random() * 32 ) - 16, h + (int) ( Math.random() * 32 ) - 16);
+				Star s = new Star( w + (int) ( Math.random() * 32 ) - 16, h + (int) ( Math.random() * 32 ) - 16 );
 				addObject( s, s.getX(), s.getY() );
 			}
 	}
@@ -102,42 +102,57 @@ public abstract class ShudyWorld extends World
 		Settings.SOUND = Boolean.parseBoolean( Settings.SETTINGS.getProperty("sound") );
 	}
 	
-	private void doCheat(String cheat, String suffix) throws IOException
+	private void doCheat(String cheat) throws IOException
 	{
-		File egg = File.createTempFile("shudy-cheat.", suffix);
+		File egg = File.createTempFile( "shudy-cheat", ".ogg" );
 		egg.deleteOnExit();
 		
-		if ( Settings.SOUND && cheat.equals("rickroll") )
-		{
-			try ( InputStream yolk = new URL("https://upload.wikimedia.org/wikipedia/en/d/d0/Rick_Astley_-_Never_Gonna_Give_You_Up.ogg").openStream() )
-			{ Files.copy(yolk, egg.toPath(), StandardCopyOption.REPLACE_EXISTING); }
-		
-			Mayflower.playSound( egg.getAbsolutePath() );
-		}
-		else if ( Settings.SOUND && cheat.equals("FULLCOMMUNISM") )
-		{
-			try ( InputStream yolk = new URL("https://upload.wikimedia.org/wikipedia/commons/d/db/Gimn_Sovetskogo_Soyuza_%281977_Vocal%29.oga").openStream() )
-			{ Files.copy(yolk, egg.toPath(), StandardCopyOption.REPLACE_EXISTING); }
+		URL sound = null;
 			
-			Mayflower.playSound( egg.getAbsolutePath() );
-		}
-		else if ( cheat.equals("god") )
-			for ( Player p : getObjects( Player.class ) )
+		if ( Settings.SOUND )
+			switch(cheat)
 			{
-				p.setHealth( Integer.MAX_VALUE );
-				p.setAmmo( Integer.MAX_VALUE );
+				case "rickroll":
+					sound = new URL( "https://upload.wikimedia.org/wikipedia/en/d/d0/Rick_Astley_-_Never_Gonna_Give_You_Up.ogg" );
+					break;
+				case "FULLCOMMUNISM":
+					sound = new URL( "https://upload.wikimedia.org/wikipedia/commons/d/db/Gimn_Sovetskogo_Soyuza_%281977_Vocal%29.oga" );
+					break;
 			}
-		else if ( cheat.equals("shotgun") )
-			for ( Player p : getObjects( Player.class ) )
-				p.equip(new LaserBlaster(p) );
-		else if ( cheat.equals("semi") )
-			for ( Player p : getObjects( Player.class ) )
-				p.equip(new SemiLaser(p) );
-		else if ( cheat.equals("auto") )
-			for ( Player p : getObjects( Player.class ) )
-				p.equip(new AutoLaser(p) );
-		else if ( cheat.equals("levelup") )
-			for ( Player p : getObjects( Player.class ) )
-				((Level1) p.getWorld()).addPoints(500);
+		
+			if ( sound != null )
+			{
+				try ( InputStream yolk = sound.openStream() )
+				{ Files.copy(yolk, egg.toPath(), StandardCopyOption.REPLACE_EXISTING); }
+				
+				Mayflower.playSound( egg.getAbsolutePath() );
+			}
+			
+		switch(cheat)
+		{
+			case "god":
+				for ( Player p : getObjects( Player.class ) )
+				{
+					p.setHealth( Integer.MAX_VALUE );
+					p.setAmmo( Integer.MAX_VALUE );
+				}
+				break;
+			case "shotgun":
+				for ( Player p : getObjects( Player.class ) )
+					p.equip(new LaserBlaster(p) );
+				break;
+			case "semi":
+				for ( Player p : getObjects( Player.class ) )
+					p.equip(new SemiLaser(p) );
+				break;
+			case "auto":
+				for ( Player p : getObjects( Player.class ) )
+					p.equip(new AutoLaser(p) );
+				break;
+			case "levelup":
+				for ( Player p : getObjects( Player.class ) )
+					((Level1) p.getWorld()).addPoints(500);
+				break;
+		}
 	}
 }
