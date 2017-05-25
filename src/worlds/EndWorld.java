@@ -1,6 +1,7 @@
 package worlds;
 
 import actors.MenuRobot;
+import actors.WorldChangeButton;
 import engine.Settings;
 import mayflower.Color;
 import mayflower.Label;
@@ -20,5 +21,7 @@ public class EndWorld extends MainMenu
 		
 		for (int i = 0; i < 12; i++ )
 			addObject( new MenuRobot( MainMenu.IMAGES[ (int) ( Math.random() * 2 ) ] ), Mayflower.getRandomNumber(Settings.WIDTH), Mayflower.getRandomNumber(Settings.HEIGHT) );
+		
+		addObject( new WorldChangeButton<MainMenu>("assets/img/buttons/back.gif", MainMenu.class), Settings.WIDTH / 2 - 100, Settings.HEIGHT - 200 );
 	}
 }
