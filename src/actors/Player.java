@@ -1,6 +1,7 @@
 package actors;
 
 import worlds.EndWorld;
+import engine.Settings;
 import items.AutoLaser;
 import items.SemiLaser;
 
@@ -31,11 +32,21 @@ public class Player extends ShudyActor
 		// speed control (ARROW_UP/ARROW_DOWN)
 		speed();
 		
-		//if ( weapon.getClass() == AutoLaser.class && Mouse.isButtonDown( 0 ) )
 		if ( weapon instanceof AutoLaser && Mayflower.getMouseInfo().getButton() == 0 )
 			weapon.fire();
 		else if ( Mayflower.mousePressed( null ) )
 			weapon.fire();
+		
+		if ( getX() > Settings.WIDTH )
+			setLocation( 0, getY() );
+		else if ( getX() < 0 )
+			setLocation( Settings.WIDTH, getY() );
+		
+		if ( getY() > Settings.HEIGHT )
+			setLocation( getX(), 0 );
+		else if ( getY() < 0 )
+			setLocation( getX(), Settings.HEIGHT );
+		
 	}
 	
 	protected void move()
