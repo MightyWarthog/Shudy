@@ -28,13 +28,13 @@ public class MainMenu extends ShudyWorld
 			return;
 		
 		QuitButton quit = new QuitButton("assets/img/buttons/quit.gif");
-		addObject( quit, getWidth()/2-100, getHeight()-100 );
+		addObject( quit, Settings.WIDTH / 2 - 100, Settings.HEIGHT - 100 );
 		
 		WorldChangeButton<Level1> play = new WorldChangeButton<Level1>( "assets/img/buttons/play.gif", Level1.class );
-		addObject( play, getWidth()/2-100, 100);
+		addObject( play, Settings.WIDTH / 2 - 100, 100);
 		
 		WorldChangeButton<OptionsWorld> options = new WorldChangeButton<OptionsWorld>( "assets/img/buttons/options.gif", OptionsWorld.class );
-		addObject( options, getWidth()/2-100, getHeight()-200 );
+		addObject( options, Settings.WIDTH / 2 - 100, Settings.HEIGHT - 200 );
 		
 		botSpawner = new Timer();
 		

@@ -36,13 +36,13 @@ public class Level1 extends ShudyWorld
 		addObject(karel, 400, 300);
 		
 		scoreCard = new Label( "Score: " + points, 36, new Color(0, 136, 0) );
-		addObject( scoreCard, getWidth() / 2 + 300, getHeight()-50 );
+		addObject( scoreCard, Settings.WIDTH / 2 + 300, Settings.HEIGHT - 50 );
 		
 		healthCard = new Label( "Health: " + karel.getHealth(), 36, new Color(0, 136, 0) );
-		addObject( healthCard, getWidth() / 2 - 300, getHeight()-50 );
+		addObject( healthCard, Settings.WIDTH / 2 - 300, Settings.HEIGHT - 50 );
 		
 		ammoCard = new Label( "Ammo: \u221e", 36, new Color(0, 136, 0) );
-		addObject( ammoCard, 200, getHeight() - 50 );
+		addObject( ammoCard, 200, Settings.HEIGHT - 50 );
 	}
 	
 	@Override
