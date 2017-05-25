@@ -13,6 +13,7 @@ import items.AutoLaser;
 import items.LaserBlaster;
 import items.SemiLaser;
 import engine.Settings;
+import engine.ShudyLogger;
 
 import mayflower.Keyboard;
 import mayflower.Mayflower;
@@ -31,6 +32,8 @@ public abstract class ShudyWorld extends World
 {
 	private static final MayflowerMusic MENU_MUSIC = new MayflowerMusic( "assets/snd/menu_1.ogg" );
 	
+	protected static final ShudyLogger LOGGER = new ShudyLogger();
+	
 	private static List<Star> stars;
 	
 	public ShudyWorld()
@@ -38,20 +41,24 @@ public abstract class ShudyWorld extends World
 
 	public ShudyWorld(boolean drawStars)
 	{
+		LOGGER.log("Setting background...");
 		try
 		{ setBackground( new Image(Settings.BACKGROUND).getScaledCopy(Settings.WIDTH, Settings.HEIGHT) ); }
 		catch (SlickException e)
 		{ e.printStackTrace(); }
 
+		LOGGER.log("Setting paint order...");
 		setPaintOrder(Star.class, ProjLaser.class, ShudyActor.class, Label.class);
 		
 		if (drawStars && stars != null)
 		{
+			LOGGER.log("Adding pre-generated stars...");
 			for ( Star s : stars )
 				addObject( s, s.getX(), s.getY() );
 		}
 		else if ( drawStars )	
 		{
+			LOGGER.log("Generating stars...");
 			generateStars();
 			stars = getObjects(Star.class);
 		}
@@ -95,7 +102,8 @@ public abstract class ShudyWorld extends World
 	}
 
 	public static void updateFields()
-	{	
+	{
+		LOGGER.log("Refreshing settings...");
 		Settings.VSYNC = Boolean.parseBoolean( Settings.SETTINGS.getProperty("vsync") );
 		Settings.FULLSCREEN = Boolean.parseBoolean( Settings.SETTINGS.getProperty("fullscreen") );
 		Settings.SHOWFPS = Boolean.parseBoolean( Settings.SETTINGS.getProperty("showFPS") );
