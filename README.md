@@ -1,7 +1,5 @@
 # Shudy
 
-# No further commits will be pushed until at least 05/14/2017 due to other students plagiarizing my code.
-
 # Big Fat Warning
 
     Shudy is a work in progress, and as such may not function correctly, or at all.
