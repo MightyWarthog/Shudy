@@ -36,10 +36,10 @@ public class ProjLaser extends Actor
 	}
 	
 	private void die()
-	{		
-			for ( int i = 0; i < 32; i++ )			
-				world.addObject( new LaserParticle(), getX()-2, getY() );
-			
-			world.removeObject(this);
+	{
+		for ( int i = 0; i < 32; i++ )			
+			world.addObject( new LaserParticle(), getX()-2, getY() );
+
+		world.removeObject(this);
 	}
 }

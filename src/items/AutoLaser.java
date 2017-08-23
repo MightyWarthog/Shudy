@@ -8,14 +8,10 @@ public class AutoLaser extends SemiLaser implements Weapon
 	private int ammo;
 	
 	public AutoLaser(ShudyActor a)
-	{
-		this ( a, 9 );
-	}
+	{ this ( a, 9 ); }
 	
 	public AutoLaser(ShudyActor a, int d)
-	{
-		this(a, d, 134);
-	}
+	{ this(a, d, 134); }
 	
 	public AutoLaser(ShudyActor a, int d, int milis)
 	{
