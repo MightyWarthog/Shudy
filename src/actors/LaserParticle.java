@@ -1,16 +1,16 @@
 package actors;
 
 import mayflower.Actor;
+import mayflower.MayflowerImage;
 
 public class LaserParticle extends Actor
 {	
 	private int moved;
+	private static final MayflowerImage[] IMAGES = { new MayflowerImage("assets/img/actors/1x1red.gif"), new MayflowerImage("assets/img/actors/1x1red.gif"), new MayflowerImage("assets/img/actors/1x1red.gif"), new MayflowerImage("assets/img/actors/1x1red.gif"), new MayflowerImage("assets/img/actors/3x3red.gif"), new MayflowerImage("assets/img/actors/3x3red.gif"), new MayflowerImage("assets/img/actors/4x4red.gif"), new MayflowerImage("assets/img/actors/4x4red.gif") }; 
 	
 	public LaserParticle()
-	{
-		final String[] images = { "1x1red.gif", "1x1red.gif", "1x1red.gif", "1x1red.gif", "3x3red.gif", "3x3red.gif", "4x4red.gif", "4x4red.gif" };
-		
-		setImage("assets/img/actors/"+images[ (int) (Math.random() * images.length) ]);
+	{		
+		setImage(IMAGES[ (int) (Math.random() * IMAGES.length) ]);
 		
 		setRotation( (int) ( Math.random() * 360 + 1 ) );
 		moved = 0;

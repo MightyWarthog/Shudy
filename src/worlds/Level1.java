@@ -10,6 +10,7 @@ import items.LaserBlaster;
 import mayflower.Color;
 import mayflower.Label;
 import mayflower.Mayflower;
+import mayflower.MayflowerImage;
 import mayflower.Timer;
 
 public class Level1 extends ShudyWorld
@@ -24,6 +25,8 @@ public class Level1 extends ShudyWorld
 	
 	private Timer spawner;
 	private Timer medkit;
+	
+	private MayflowerImage enemyTexture;
 	
 	public Level1()
 	{
@@ -43,6 +46,8 @@ public class Level1 extends ShudyWorld
 		
 		ammoCard = new Label( "Ammo: \u221e", 36, new Color(0, 136, 0) );
 		addObject( ammoCard, 200, Settings.HEIGHT - 50 );
+		
+		enemyTexture = new MayflowerImage("assets/img/actors/enemy.gif");
 	}
 	
 	@Override
@@ -60,18 +65,18 @@ public class Level1 extends ShudyWorld
 		if ( spawner.isDone() )
 		{
 			if ( points < 1000 )
-				addObject( new Grunt( 50, 10, "assets/img/actors/enemy.gif" ), Mayflower.getRandomNumber( Settings.WIDTH ), Mayflower.getRandomNumber( Settings.HEIGHT ) );
+				addObject( new Grunt( 50, 10, enemyTexture ), Mayflower.getRandomNumber( Settings.WIDTH ), Mayflower.getRandomNumber( Settings.HEIGHT ) );
 			else if ( points < 2000)
-				addObject( new Elite( 50, 8, 768, "assets/img/actors/enemy.gif" ), Mayflower.getRandomNumber( Settings.WIDTH ), Mayflower.getRandomNumber( Settings.HEIGHT ) );
+				addObject( new Elite( 50, 8, 768, enemyTexture ), Mayflower.getRandomNumber( Settings.WIDTH ), Mayflower.getRandomNumber( Settings.HEIGHT ) );
 			else if ( points <= 2500 )
 			{
-				Elite e = new Elite( 50, 8, 512, "assets/img/actors/enemy.gif" );
+				Elite e = new Elite( 50, 8, 512, enemyTexture );
 				e.equip( new AutoLaser(e, 2, 200) );
 				addObject( e, Mayflower.getRandomNumber( Settings.WIDTH ), Mayflower.getRandomNumber( Settings.HEIGHT ) );
 			}
 			else
 			{
-				Elite e = new Elite( 50, 8, 384, "assets/img/actors/enemy.gif" );
+				Elite e = new Elite( 50, 8, 384, enemyTexture );
 				e.equip( new LaserBlaster(e) );
 				addObject( e, Mayflower.getRandomNumber( Settings.WIDTH ), Mayflower.getRandomNumber( Settings.HEIGHT ) );
 			}

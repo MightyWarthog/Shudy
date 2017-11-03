@@ -8,6 +8,7 @@ import actors.ToggleButton;
 import actors.WorldChangeButton;
 
 import mayflower.Mayflower;
+import mayflower.MayflowerImage;
 
 public class OptionsWorld extends ShudyWorld
 {
@@ -28,7 +29,7 @@ public class OptionsWorld extends ShudyWorld
 		ToggleButton sound = new ToggleButton( "assets/img/buttons/sound", "sound" );
 		addObject( sound, Settings.WIDTH / 2 - 100, 500);
 		
-		WorldChangeButton<MainMenu> back = new WorldChangeButton<MainMenu>( "assets/img/buttons/back.gif", MainMenu.class );
+		WorldChangeButton<MainMenu> back = new WorldChangeButton<MainMenu>( new MayflowerImage("assets/img/buttons/back.gif"), MainMenu.class );
 		addObject( back, Settings.WIDTH / 2 - 100, Settings.HEIGHT - 100 );
 	}
 	

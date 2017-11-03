@@ -3,13 +3,14 @@ package actors;
 import java.util.List;
 
 import items.SemiLaser;
+import mayflower.MayflowerImage;
 import worlds.Level1;
 
 public class Elite extends Grunt
 {
 	private int range;
 	
-	public Elite(int h, int s, int r, String img)
+	public Elite(int h, int s, int r, MayflowerImage img)
 	{
 		super(h, s, img);
 		range = r;

@@ -9,6 +9,9 @@ import engine.Settings;
 import worlds.ShudyWorld;
 
 import mayflower.Mayflower;
+import mayflower.MayflowerImage;
+
+//Not fixing this probably
 
 public class ToggleButton extends Label
 {
@@ -22,7 +25,7 @@ public class ToggleButton extends Label
 	
 	public ToggleButton(String img, String setting)
 	{
-		super("assets/img/buttons/empty.gif");
+		super(new MayflowerImage(0, 0));
 		
 		this.setting = setting;
 		this.img = img;

@@ -7,6 +7,7 @@ import engine.Settings;
 
 import mayflower.Actor;
 import mayflower.Mayflower;
+import mayflower.MayflowerImage;
 import mayflower.Timer;
 import mayflower.World;
 
@@ -25,7 +26,7 @@ public class SemiLaser extends Actor implements Weapon
 	public SemiLaser( ShudyActor a )
 	{ this( a, 10, 175 ); }
 	
-	public SemiLaser( ShudyActor a, int d, int milis )
+	public SemiLaser(ShudyActor a, int d, int milis)
 	{
 		actor = a;
 		damage = d;
@@ -41,7 +42,7 @@ public class SemiLaser extends Actor implements Weapon
 		
 		if ( cooldown.isDone() )
 		{
-			ProjLaser laser = new ProjLaser(25, damage, actor);
+			ProjLaser laser = new ProjLaser(25, damage, actor, new MayflowerImage("assets/img/actors/laser.gif"));
 			laser.setRotation(  actor.getRotation() );
 			world.addObject( laser, actor.getCenterX() - actor.getImage().getWidth() / 2, actor.getCenterY() );
 			cooldown.set( cooldownInMilis );

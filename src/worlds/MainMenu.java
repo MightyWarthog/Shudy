@@ -9,11 +9,12 @@ import items.LaserBlaster;
 import items.SemiLaser;
 
 import mayflower.Mayflower;
+import mayflower.MayflowerImage;
 import mayflower.Timer;
 
 public class MainMenu extends ShudyWorld
 {
-	protected static final String[] IMAGES = { "assets/img/actors/enemy.gif", "assets/img/actors/player.gif" };
+	protected static final MayflowerImage[] IMAGES = { new MayflowerImage("assets/img/actors/enemy.gif"), new MayflowerImage("assets/img/actors/player.gif") };
 	
 	protected Timer botSpawner;
 	
@@ -27,13 +28,13 @@ public class MainMenu extends ShudyWorld
 		if (b)
 			return;
 		
-		QuitButton quit = new QuitButton("assets/img/buttons/quit.gif");
+		QuitButton quit = new QuitButton(new MayflowerImage("assets/img/buttons/quit.gif"));
 		addObject( quit, Settings.WIDTH / 2 - 100, Settings.HEIGHT - 100 );
 		
-		WorldChangeButton<Level1> play = new WorldChangeButton<Level1>( "assets/img/buttons/play.gif", Level1.class );
+		WorldChangeButton<Level1> play = new WorldChangeButton<Level1>( new MayflowerImage("assets/img/buttons/play.gif"), Level1.class );
 		addObject( play, Settings.WIDTH / 2 - 100, 100);
 		
-		WorldChangeButton<OptionsWorld> options = new WorldChangeButton<OptionsWorld>( "assets/img/buttons/options.gif", OptionsWorld.class );
+		WorldChangeButton<OptionsWorld> options = new WorldChangeButton<OptionsWorld>( new MayflowerImage("assets/img/buttons/options.gif"), OptionsWorld.class );
 		addObject( options, Settings.WIDTH / 2 - 100, Settings.HEIGHT - 200 );
 		
 		botSpawner = new Timer();

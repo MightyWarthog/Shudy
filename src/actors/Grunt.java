@@ -2,11 +2,12 @@ package actors;
 
 import java.util.List;
 
+import mayflower.MayflowerImage;
 import worlds.Level1;
 
 public class Grunt extends ShudyActor
 {
-	public Grunt(int h, int s, String img)
+	public Grunt(int h, int s, MayflowerImage img)
 	{
 		health = h;
 		speed = s;

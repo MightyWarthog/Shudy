@@ -2,12 +2,14 @@ package actors;
 
 import java.util.List;
 
+import mayflower.MayflowerImage;
+
 public class MenuRobot extends Grunt
 {
 	private MenuRobot target;
 	private boolean dead;
 	
-	public MenuRobot( String img )
+	public MenuRobot(MayflowerImage img)
 	{
 		super(100, 8, img);
 		

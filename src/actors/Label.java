@@ -7,8 +7,8 @@ import mayflower.MayflowerImage;
 
 public class Label extends Actor
 {
-	public Label(String img)
-	{ setImage(img); }
+	//public Label(String img)
+	//{ setImage(img); }
 
 	public Label(MayflowerImage img)
 	{ setImage(img); }

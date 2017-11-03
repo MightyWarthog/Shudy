@@ -1,11 +1,12 @@
 package actors;
 
 import mayflower.Mayflower;
+import mayflower.MayflowerImage;
 
 public class QuitButton extends Label
 {
 
-	public QuitButton(String img)
+	public QuitButton(MayflowerImage img)
 	{
 		super(img);
 	}

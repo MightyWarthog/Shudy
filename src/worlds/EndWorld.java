@@ -6,10 +6,11 @@ import engine.Settings;
 import mayflower.Color;
 import mayflower.Label;
 import mayflower.Mayflower;
+import mayflower.MayflowerImage;
 import mayflower.Timer;
 
 public class EndWorld extends MainMenu
-{	
+{
 	public EndWorld()
 	{
 		super(true);
@@ -22,6 +23,6 @@ public class EndWorld extends MainMenu
 		for (int i = 0; i < 12; i++ )
 			addObject( new MenuRobot( MainMenu.IMAGES[ (int) ( Math.random() * 2 ) ] ), Mayflower.getRandomNumber(Settings.WIDTH), Mayflower.getRandomNumber(Settings.HEIGHT) );
 		
-		addObject( new WorldChangeButton<MainMenu>("assets/img/buttons/back.gif", MainMenu.class), Settings.WIDTH / 2 - 100, Settings.HEIGHT - 200 );
+		addObject( new WorldChangeButton<MainMenu>(new MayflowerImage("assets/img/buttons/back.gif"), MainMenu.class), Settings.WIDTH / 2 - 100, Settings.HEIGHT - 200 );
 	}
 }

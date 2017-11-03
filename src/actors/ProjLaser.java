@@ -1,6 +1,7 @@
 package actors;
 
 import mayflower.Actor;
+import mayflower.MayflowerImage;
 import mayflower.World;
 
 public class ProjLaser extends Actor
@@ -12,11 +13,11 @@ public class ProjLaser extends Actor
 	
 	private World world;
 	
-	public ProjLaser(int s, int d, ShudyActor a)
+	public ProjLaser(int s, int d, ShudyActor a, MayflowerImage img)
 	{
 		speed = s;
 		damage = d;
-		setImage("assets/img/actors/laser.gif");
+		setImage(img);
 		immune = a;
 	}
 	
